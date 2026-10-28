@@ -139,7 +139,7 @@ export default function ReviewsPage() {
                     {review.is_approved ? "Approved" : "Pending"}
                   </span>
 
-                  <span className="text-xs text-gray-400">{new Date(review.created_at).toLocaleDateString()}</span>
+                  <span className="text-xs text-gray-400">{new Date(review.created_at).toLocaleDateString("en-GB")}</span>
                 </button>
 
                 {isExpanded && (

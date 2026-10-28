@@ -139,7 +139,9 @@ export default function OrdersPage() {
                     <select
                       value={order.status}
                       onChange={(e) => statusMutation.mutate({ id: order.id, status: e.target.value })}
-                      className="rounded-md border-0 bg-transparent py-0 text-xs font-semibold focus:ring-2 focus:ring-[#5A1F1F]/20"
+                      disabled={order.status === "cancelled"}
+                      title={order.status === "cancelled" ? "Refunded orders are locked" : undefined}
+                      className="rounded-md border-0 bg-transparent py-0 text-xs font-semibold focus:ring-2 focus:ring-[#5A1F1F]/20 disabled:cursor-not-allowed disabled:opacity-60"
                     >
                       {STATUSES.filter(Boolean).map((s) => (
                         <option key={s} value={s}>{s}</option>
@@ -147,7 +149,7 @@ export default function OrdersPage() {
                     </select>
                   </td>
                   <td className="px-4 py-3 text-xs text-gray-400">
-                    {new Date(order.created_at).toLocaleDateString()}
+                    {new Date(order.created_at).toLocaleDateString("en-GB")}
                   </td>
                 </tr>
               ))

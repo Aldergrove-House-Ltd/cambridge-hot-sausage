@@ -16,7 +16,15 @@ export function ContactForm() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ ...data, website: "" }),
       });
-      if (!res.ok) throw new Error(`${res.status}`);
+      if (!res.ok) {
+        // Surface DRF's field-level validation message so the user sees
+        // what to fix instead of a generic "something went wrong".
+        const body = await res.json().catch(() => null);
+        const firstError = body && typeof body === "object"
+          ? Object.values(body).flat().find((v) => typeof v === "string")
+          : null;
+        throw new Error((firstError as string) || `${res.status}`);
+      }
       return res.json();
     },
     onSuccess: () => setSubmitted(true),
@@ -161,6 +169,7 @@ export function ContactForm() {
                         name="subject"
                         type="text"
                         required
+                        minLength={3}
                         maxLength={200}
                         className="w-full rounded-xl border border-brand-maroon/10 bg-white/70 px-4 py-3 text-sm text-brand-ink placeholder:text-brand-ink/30 transition-[border-color,box-shadow] duration-300 focus:border-brand-maroon/30 focus:outline-none focus:ring-4 focus:ring-brand-maroon/5"
                       />
@@ -184,7 +193,11 @@ export function ContactForm() {
                   </div>
 
                   {mutation.isError && (
-                    <p className="text-sm text-red-600">{t("form.error")}</p>
+                    <p className="text-sm text-red-600">
+                      {mutation.error instanceof Error && mutation.error.message && !/^\d+$/.test(mutation.error.message)
+                        ? mutation.error.message
+                        : t("form.error")}
+                    </p>
                   )}
 
                   <button

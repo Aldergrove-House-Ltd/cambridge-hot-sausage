@@ -4,6 +4,11 @@ services:
     ports:
       - "8000:8000"
     env_file: ./server/.env
+    volumes:
+      - backend_db:/app/db
+      - backend_media:/app/media
+    environment:
+      - SQLITE_PATH=/app/db/db.sqlite3
     depends_on:
       - redis
     restart: unless-stopped
@@ -20,9 +25,10 @@ services:
 
   redis:
     image: redis:7-alpine
-    # Bind to loopback only — unauthenticated Redis must never be
-    # reachable from the network. Inter-container access still works
-    # via the compose network.
-    ports:
-      - "127.0.0.1:6379:6379"
+    # No host port — host 6379 is taken by a local redis-server.
+    # Backend reaches this service via the compose network as `redis:6379`.
     restart: unless-stopped
+
+volumes:
+  backend_db:
+  backend_media:

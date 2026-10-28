@@ -23,6 +23,9 @@ class ConfirmBookingView(APIView):
     updates the booking record, creates a Stripe Checkout session.
     """
 
+    # Public endpoint — skip DRF session auth so admin cookies in the
+    # same browser do not trigger CSRF on this anonymous booking flow.
+    authentication_classes = []
     permission_classes = [AllowAny]
 
     def post(self, request):

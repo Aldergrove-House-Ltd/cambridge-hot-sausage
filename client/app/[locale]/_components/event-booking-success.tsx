@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import { useTranslations } from "next-intl";
-import { CheckCircle } from "lucide-react";
+import { CheckCircle, Receipt } from "lucide-react";
 import { Link } from "@/i18n/navigation";
 
 interface SessionData {
@@ -72,12 +72,24 @@ export function EventBookingSuccess() {
               </div>
             )}
 
-            <Link
-              href="/"
-              className="mt-8 inline-flex items-center gap-2 rounded-full bg-brand-maroon px-6 py-3 text-sm font-semibold uppercase tracking-wider text-brand-cream shadow-[0_10px_25px_-8px_rgba(90,31,31,0.4)] transition-all duration-300 hover:scale-[1.02] hover:shadow-[0_15px_35px_-8px_rgba(90,31,31,0.55)]"
-            >
-              {t("backToHome")}
-            </Link>
+            <div className="mt-8 flex flex-col items-center gap-3 sm:flex-row sm:justify-center">
+              {data?.receipt_url && (
+                <a
+                  href={data.receipt_url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 rounded-full border-2 border-brand-maroon bg-white/60 px-6 py-3 text-sm font-semibold uppercase tracking-wider text-brand-maroon backdrop-blur-sm transition-all duration-300 hover:scale-[1.02] hover:bg-brand-maroon/5"
+                >
+                  <Receipt size={16} /> View receipt
+                </a>
+              )}
+              <Link
+                href="/"
+                className="inline-flex items-center gap-2 rounded-full bg-brand-maroon px-6 py-3 text-sm font-semibold uppercase tracking-wider text-brand-cream shadow-[0_10px_25px_-8px_rgba(90,31,31,0.4)] transition-all duration-300 hover:scale-[1.02] hover:shadow-[0_15px_35px_-8px_rgba(90,31,31,0.55)]"
+              >
+                {t("backToHome")}
+              </Link>
+            </div>
           </>
         )}
       </div>

@@ -4,6 +4,7 @@ from rest_framework.routers import DefaultRouter
 from shop.views import AdminProductViewSet, AdminCategoryViewSet, AdminReviewViewSet, AdminVariantViewSet, AdminImageViewSet
 from orders.views import AdminOrderViewSet, RefundOrderView
 from events.views import AdminBookingViewSet, AdminBlockedDateViewSet, AdminEventConfigView, AdminTimeSlotViewSet
+from events.views.refund_booking import RefundBookingView, BookingReceiptView
 from contact.views import AdminContactMessageViewSet
 from newsletter.views import AdminSubscriberViewSet
 
@@ -24,4 +25,6 @@ urlpatterns = [
     path("", include(router.urls)),
     path("event-config", AdminEventConfigView.as_view(), name="admin-event-config"),
     path("orders/<uuid:pk>/refund", RefundOrderView.as_view(), name="admin-order-refund"),
+    path("bookings/<uuid:pk>/refund", RefundBookingView.as_view(), name="admin-booking-refund"),
+    path("bookings/<uuid:pk>/receipt", BookingReceiptView.as_view(), name="admin-booking-receipt"),
 ]

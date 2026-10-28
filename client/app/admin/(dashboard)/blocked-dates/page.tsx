@@ -114,7 +114,7 @@ export default function BlockedDatesPage() {
             ) : (
               data.map((bd) => (
                 <tr key={bd.id} className="border-b border-gray-50 transition-colors hover:bg-gray-50/50">
-                  <td className="px-4 py-3 font-medium text-gray-800">{bd.date}</td>
+                  <td className="px-4 py-3 font-medium text-gray-800">{new Date(bd.date).toLocaleDateString("en-GB")}</td>
                   <td className="px-4 py-3 text-gray-600">{bd.reason || "—"}</td>
                   <td className="px-4 py-3 text-right">
                     <button

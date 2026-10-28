@@ -5,7 +5,20 @@ import Image from "next/image";
 import { useTranslations } from "next-intl";
 import { ArrowLeft, Check, Minus, Plus, Star, ShoppingCart } from "lucide-react";
 import ReactMarkdown from "react-markdown";
-import rehypeSanitize from "rehype-sanitize";
+import rehypeSanitize, { defaultSchema } from "rehype-sanitize";
+import remarkGfm from "remark-gfm";
+import remarkBreaks from "remark-breaks";
+
+// Allow GFM task-list checkboxes through the sanitizer. The default schema
+// strips <input>, which turns "- [x] item" into just "item".
+const markdownSanitizeSchema = {
+  ...defaultSchema,
+  tagNames: [...(defaultSchema.tagNames ?? []), "input"],
+  attributes: {
+    ...defaultSchema.attributes,
+    input: ["type", "checked", "disabled"],
+  },
+};
 import { Link } from "@/i18n/navigation";
 import { useCart } from "@/lib/cart/context";
 import type { ProductDetail, ProductVariant } from "@/types/shop";
@@ -296,7 +309,10 @@ export function ShopProductDetail({ product }: ShopProductDetailProps) {
                   {t("detail.description")}
                 </h2>
                 <div className="prose prose-sm mt-3 max-w-none text-brand-ink/70">
-                  <ReactMarkdown rehypePlugins={[rehypeSanitize]}>{product.description}</ReactMarkdown>
+                  <ReactMarkdown
+                    remarkPlugins={[remarkGfm, remarkBreaks]}
+                    rehypePlugins={[[rehypeSanitize, markdownSanitizeSchema]]}
+                  >{product.description}</ReactMarkdown>
                 </div>
               </div>
             </div>

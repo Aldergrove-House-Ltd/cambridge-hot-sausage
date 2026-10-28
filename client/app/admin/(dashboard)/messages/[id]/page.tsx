@@ -72,7 +72,7 @@ export default function MessageDetailPage({ params }: { params: Promise<{ id: st
           <div className="mt-4 border-t border-gray-100 pt-4">
             <span className="text-xs font-semibold uppercase tracking-wider text-gray-400">Received</span>
             <p className="mt-1 text-sm text-gray-600">
-              {new Date(msg.created_at).toLocaleString()}
+              {new Date(msg.created_at).toLocaleString("en-GB")}
             </p>
           </div>
         </div>

@@ -70,7 +70,7 @@ export default function NewProductPage() {
       </Link>
       <h1 className="text-2xl font-bold text-gray-900">New Product</h1>
 
-      <form onSubmit={handleSubmit} className="mt-6 max-w-2xl space-y-5 rounded-xl border border-gray-100 bg-white p-6 shadow-sm">
+      <form onSubmit={handleSubmit} className="mt-6 w-full space-y-5 rounded-xl border border-gray-100 bg-white p-6 shadow-sm">
         <div className="grid gap-5 sm:grid-cols-2">
           <div>
             <label htmlFor="name" className="mb-1 block text-xs font-semibold uppercase tracking-wider text-gray-400">Name</label>

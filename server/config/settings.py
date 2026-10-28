@@ -99,10 +99,11 @@ if _database_url:
         }
     }
 else:
+    _sqlite_path = config("SQLITE_PATH", default="")
     DATABASES = {
         "default": {
             "ENGINE": "django.db.backends.sqlite3",
-            "NAME": BASE_DIR / "db.sqlite3",
+            "NAME": _sqlite_path if _sqlite_path else BASE_DIR / "db.sqlite3",
         }
     }
 
@@ -217,9 +218,12 @@ REST_FRAMEWORK = {
         "anon": "60/minute",
         "user": "120/minute",
     },
-    "DEFAULT_AUTHENTICATION_CLASSES": [
-        "rest_framework.authentication.SessionAuthentication",
-    ],
+    # Public endpoints are the default and never need DRF to touch the
+    # Django session. Admin viewsets opt into SessionAuthentication
+    # explicitly, which also opts them into DRF's CSRF enforcement.
+    # Keeping SessionAuthentication global causes an admin session
+    # cookie (in the same browser) to force CSRF on every public POST.
+    "DEFAULT_AUTHENTICATION_CLASSES": [],
 }
 
 # ── Session & CSRF ──────────────────────────────────────────────

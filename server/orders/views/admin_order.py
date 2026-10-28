@@ -2,6 +2,7 @@ from django.db.models import Count
 from rest_framework import viewsets
 from rest_framework.authentication import SessionAuthentication
 from rest_framework.permissions import IsAdminUser
+from rest_framework.response import Response
 
 from orders.models import Order
 from orders.serializers import AdminOrderListSerializer, AdminOrderDetailSerializer, AdminOrderStatusSerializer
@@ -25,3 +26,12 @@ class AdminOrderViewSet(viewsets.ModelViewSet):
         if self.action == "partial_update":
             return AdminOrderStatusSerializer
         return AdminOrderDetailSerializer
+
+    def partial_update(self, request, *args, **kwargs):
+        order = self.get_object()
+        if order.status == Order.Status.CANCELLED:
+            return Response(
+                {"error": "Cannot change status of a refunded/cancelled order."},
+                status=409,
+            )
+        return super().partial_update(request, *args, **kwargs)

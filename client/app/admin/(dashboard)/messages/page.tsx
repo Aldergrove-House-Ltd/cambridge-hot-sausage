@@ -127,7 +127,7 @@ export default function MessagesPage() {
                     </select>
                   </td>
                   <td className="px-4 py-3 text-xs text-gray-400">
-                    {new Date(msg.created_at).toLocaleDateString()}
+                    {new Date(msg.created_at).toLocaleDateString("en-GB")}
                   </td>
                 </tr>
               ))

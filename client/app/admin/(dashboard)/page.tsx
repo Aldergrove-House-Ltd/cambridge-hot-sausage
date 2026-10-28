@@ -3,7 +3,7 @@
 import { useQuery } from "@tanstack/react-query";
 import {
   Calendar,
-  DollarSign,
+  PoundSterling,
   Mail,
   ShoppingCart,
   Users,
@@ -68,7 +68,7 @@ export default function DashboardPage() {
         <StatCard
           label="Revenue"
           value={`£${data.total_revenue.toFixed(2)}`}
-          icon={<DollarSign size={18} />}
+          icon={<PoundSterling size={18} />}
           color="gold"
         />
         <StatCard
@@ -116,7 +116,7 @@ export default function DashboardPage() {
                       {order.customer_name || "Guest"}
                     </p>
                     <p className="text-xs text-gray-400">
-                      {new Date(order.created_at).toLocaleDateString()}
+                      {new Date(order.created_at).toLocaleDateString("en-GB")}
                     </p>
                   </div>
                   <div className="flex items-center gap-3">
@@ -151,7 +151,7 @@ export default function DashboardPage() {
                     <p className="text-sm font-medium text-gray-800">
                       {booking.customer_name || "Guest"}
                     </p>
-                    <p className="text-xs text-gray-400">{booking.date} · {booking.num_guests} guests</p>
+                    <p className="text-xs text-gray-400">{new Date(booking.date).toLocaleDateString("en-GB")} · {booking.num_guests} guests</p>
                   </div>
                   <div className="flex items-center gap-3">
                     <StatusBadge status={booking.status} />

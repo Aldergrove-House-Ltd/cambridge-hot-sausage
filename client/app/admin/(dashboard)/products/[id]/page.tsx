@@ -128,7 +128,7 @@ export default function EditProductPage({ params }: { params: Promise<{ id: stri
       <h1 className="text-2xl font-bold text-gray-900">Edit: {product.name}</h1>
 
       {/* Product info */}
-      <form onSubmit={handleSave} className="mt-6 max-w-3xl space-y-5 rounded-xl border border-gray-100 bg-white p-6 shadow-sm">
+      <form onSubmit={handleSave} className="mt-6 w-full space-y-5 rounded-xl border border-gray-100 bg-white p-6 shadow-sm">
         <div className="grid gap-5 sm:grid-cols-2">
           <div>
             <label htmlFor="name" className="mb-1 block text-xs font-semibold uppercase tracking-wider text-gray-400">Name</label>
@@ -168,7 +168,7 @@ export default function EditProductPage({ params }: { params: Promise<{ id: stri
       </form>
 
       {/* Images */}
-      <div className="mt-8 max-w-3xl">
+      <div className="mt-8 w-full">
         <div className="flex items-center justify-between">
           <h2 className="text-lg font-bold text-gray-900">Images</h2>
           <button type="button" onClick={() => fileInputRef.current?.click()} disabled={uploadImageMutation.isPending} className="inline-flex items-center gap-1.5 rounded-lg border border-gray-200 px-3 py-1.5 text-xs font-semibold text-gray-600 hover:bg-gray-50 disabled:opacity-50">
@@ -219,7 +219,7 @@ export default function EditProductPage({ params }: { params: Promise<{ id: stri
       </div>
 
       {/* Variants */}
-      <div className="mt-8 max-w-3xl">
+      <div className="mt-8 w-full">
         <h2 className="text-lg font-bold text-gray-900">Variants</h2>
         <div className="mt-4 space-y-2">
           {product.variants.map((v) => (

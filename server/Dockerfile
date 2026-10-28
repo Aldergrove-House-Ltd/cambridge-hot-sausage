@@ -21,6 +21,7 @@ RUN python manage.py collectstatic --noinput 2>/dev/null || true
 # Run as non-root for defence-in-depth.
 RUN addgroup --system django && \
     adduser --system --ingroup django --no-create-home django && \
+    mkdir -p /app/db /app/media && \
     chown -R django:django /app
 USER django
 

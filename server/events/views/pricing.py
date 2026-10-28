@@ -15,6 +15,7 @@ class EventConfigView(APIView):
     (bands, limits, radius).
     """
 
+    authentication_classes = []
     permission_classes = [AllowAny]
 
     def get(self, request):
@@ -30,6 +31,9 @@ class CalculatePriceView(APIView):
     the price breakdown.
     """
 
+    # Public endpoint — skip DRF session auth so admin cookies in the
+    # same browser do not trigger CSRF on this anonymous flow.
+    authentication_classes = []
     permission_classes = [AllowAny]
 
     def post(self, request):

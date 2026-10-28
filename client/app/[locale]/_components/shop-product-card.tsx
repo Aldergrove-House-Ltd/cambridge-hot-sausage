@@ -30,8 +30,16 @@ export function ShopProductCard({ product }: ShopProductCardProps) {
   return (
     <Link
       href={`/shop/${product.slug}`}
-      className="group relative flex h-full flex-col overflow-hidden rounded-2xl border border-brand-maroon/8 bg-white/60 shadow-[0_2px_12px_-4px_rgba(90,31,31,0.06)] backdrop-blur-sm transition-[transform,border-color,box-shadow] duration-500 ease-out hover:-translate-y-1 hover:border-brand-maroon/20 hover:shadow-[0_12px_40px_-12px_rgba(90,31,31,0.12)]"
+      style={{ willChange: "transform" }}
+      className="group relative flex h-full flex-col overflow-hidden rounded-2xl border border-brand-maroon/8 bg-white/60 shadow-[0_2px_12px_-4px_rgba(90,31,31,0.06)] backdrop-blur-sm transition-[transform,border-color] duration-500 ease-out hover:-translate-y-1 hover:border-brand-maroon/20"
     >
+      {/* Hover shadow — animating opacity on a pre-painted shadow is
+          compositor-only; animating box-shadow directly repaints every
+          frame and janks the hover. */}
+      <span
+        aria-hidden
+        className="pointer-events-none absolute inset-0 rounded-2xl opacity-0 shadow-[0_12px_40px_-12px_rgba(90,31,31,0.12)] transition-opacity duration-500 ease-out group-hover:opacity-100"
+      />
       {/* Image area */}
       <div className="relative aspect-[4/3] w-full overflow-hidden bg-brand-cream/50">
         {product.primary_image?.image ? (

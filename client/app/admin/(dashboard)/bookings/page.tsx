@@ -119,7 +119,7 @@ export default function BookingsPage() {
                       #{b.short_id}
                     </Link>
                   </td>
-                  <td className="px-4 py-3 font-medium text-gray-800">{b.date}</td>
+                  <td className="px-4 py-3 font-medium text-gray-800">{new Date(b.date).toLocaleDateString("en-GB")}</td>
                   <td className="px-4 py-3">
                     <p className="font-medium text-gray-800">{b.customer_name || "—"}</p>
                     <p className="text-xs text-gray-400">{b.customer_email}</p>
@@ -131,7 +131,9 @@ export default function BookingsPage() {
                     <select
                       value={b.status}
                       onChange={(e) => statusMutation.mutate({ id: b.id, status: e.target.value })}
-                      className="rounded-md border-0 bg-transparent py-0 text-xs font-semibold focus:ring-2 focus:ring-[#5A1F1F]/20"
+                      disabled={b.status === "cancelled"}
+                      title={b.status === "cancelled" ? "Refunded bookings are locked" : undefined}
+                      className="rounded-md border-0 bg-transparent py-0 text-xs font-semibold focus:ring-2 focus:ring-[#5A1F1F]/20 disabled:cursor-not-allowed disabled:opacity-60"
                     >
                       {STATUSES.filter(Boolean).map((s) => (
                         <option key={s} value={s}>{s}</option>

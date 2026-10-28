@@ -2,6 +2,8 @@ import secrets
 
 import stripe
 from django.conf import settings
+from django.utils.decorators import method_decorator
+from django.views.decorators.csrf import csrf_exempt
 from rest_framework import status
 from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
@@ -20,7 +22,11 @@ BUYER_COOKIE_NAME = "chs_buyer"
 BUYER_COOKIE_MAX_AGE = 60 * 60 * 24  # 1 day
 
 
+@method_decorator(csrf_exempt, name="dispatch")
 class CreateCheckoutSessionView(APIView):
+    # Public endpoint — disable DRF session auth so an admin cookie
+    # in the same browser does not force CSRF on this anonymous flow.
+    authentication_classes = []
     """
     POST /api/v1/orders/checkout
 

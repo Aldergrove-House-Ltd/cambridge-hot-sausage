@@ -1,6 +1,7 @@
 "use client";
 
 import dynamic from "next/dynamic";
+import remarkBreaks from "remark-breaks";
 
 const MDEditor = dynamic(() => import("@uiw/react-md-editor"), { ssr: false });
 
@@ -19,6 +20,7 @@ export function RichTextEditor({ content, onChange, placeholder }: RichTextEdito
         textareaProps={{ placeholder }}
         height={250}
         preview="live"
+        previewOptions={{ remarkPlugins: [remarkBreaks] }}
       />
     </div>
   );

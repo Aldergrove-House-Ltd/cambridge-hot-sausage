@@ -48,8 +48,9 @@ export function AboutHero() {
 
       <div className="relative mx-auto max-w-6xl px-6">
         <div className="flex flex-col items-center gap-8 lg:flex-row lg:items-end lg:gap-12">
-          {/* Text column */}
-          <div className="flex-1 pb-12 text-center lg:pb-20 lg:text-left">
+          {/* Text column — pb accounts for the 80px bottom curve so the badge
+              keeps breathing room above the cream transition. */}
+          <div className="flex-1 pb-24 text-center lg:pb-36 lg:text-left">
             <span
               data-reveal
               className="text-[10px] font-semibold uppercase tracking-[0.3em] text-brand-gold sm:text-xs"

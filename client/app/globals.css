@@ -246,3 +246,30 @@
     animation: none;
   }
 }
+
+/* Markdown preview: Tailwind v4 preflight strips ul/ol markers; restore
+   them for both the admin editor's live preview (.wmde-markdown) and
+   the public shop detail (ReactMarkdown wrapped in .prose). */
+.wmde-markdown ul {
+  list-style: disc outside;
+  padding-left: 1.5rem;
+}
+.wmde-markdown ul ul {
+  list-style: circle outside;
+}
+.wmde-markdown ul ul ul {
+  list-style: square outside;
+}
+.wmde-markdown ol {
+  list-style: decimal outside;
+  padding-left: 1.5rem;
+}
+.wmde-markdown ol ol {
+  list-style: lower-alpha outside;
+}
+.wmde-markdown li {
+  margin: 0.25rem 0;
+}
+.wmde-markdown li > input[type="checkbox"] {
+  margin-right: 0.4rem;
+}

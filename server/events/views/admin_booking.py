@@ -1,6 +1,7 @@
 from rest_framework import viewsets, generics
 from rest_framework.authentication import SessionAuthentication
 from rest_framework.permissions import IsAdminUser
+from rest_framework.response import Response
 
 from events.models import EventBooking, BlockedDate, EventConfig, TimeSlot
 from events.serializers.admin_booking import (
@@ -25,6 +26,15 @@ class AdminBookingViewSet(viewsets.ModelViewSet):
         if self.action == "partial_update":
             return AdminBookingStatusSerializer
         return AdminBookingDetailSerializer
+
+    def partial_update(self, request, *args, **kwargs):
+        booking = self.get_object()
+        if booking.status == EventBooking.Status.CANCELLED:
+            return Response(
+                {"error": "Cannot change status of a refunded/cancelled booking."},
+                status=409,
+            )
+        return super().partial_update(request, *args, **kwargs)
 
 
 class AdminBlockedDateViewSet(viewsets.ModelViewSet):

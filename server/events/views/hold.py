@@ -2,6 +2,8 @@ import secrets
 from datetime import timedelta
 
 from django.utils import timezone
+from django.utils.decorators import method_decorator
+from django.views.decorators.csrf import csrf_exempt
 from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
 from rest_framework.throttling import AnonRateThrottle
@@ -18,6 +20,7 @@ class HoldThrottle(AnonRateThrottle):
     scope = "events_hold"
 
 
+@method_decorator(csrf_exempt, name="dispatch")
 class HoldDateView(APIView):
     """
     POST /api/v1/events/hold
@@ -27,6 +30,10 @@ class HoldDateView(APIView):
     enumeration and inventory-locking abuse).
     """
 
+    # Public endpoint — explicitly disable DRF session auth so an admin
+    # session cookie in the same browser does not trigger CSRF enforcement
+    # on this anonymous booking flow.
+    authentication_classes = []
     permission_classes = [AllowAny]
     throttle_classes = [HoldThrottle]
 
@@ -77,9 +84,11 @@ class HoldDateView(APIView):
         }, status=201)
 
 
+@method_decorator(csrf_exempt, name="dispatch")
 class ReleaseHoldView(APIView):
     """DELETE /api/v1/events/hold — Release a held slot."""
 
+    authentication_classes = []
     permission_classes = [AllowAny]
 
     def delete(self, request):
