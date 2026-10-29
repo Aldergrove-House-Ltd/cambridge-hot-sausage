@@ -19,10 +19,13 @@ class AdminImageSerializer(serializers.ModelSerializer):
 
     def to_representation(self, instance):
         data = super().to_representation(instance)
-        if instance.image and hasattr(instance.image, 'url'):
+        # DRF's ImageField absolutises against the request Host, but
+        # Next.js rewrites rewrite Host to the internal docker name
+        # (backend:8000) which the browser can't resolve. Return the
+        # relative /media/... path (or pass through absolute S3/Cloudinary).
+        if instance.image:
             url = instance.image.url
-            if url.startswith("http"):
-                data["image"] = url
+            data["image"] = url
         return data
 
 

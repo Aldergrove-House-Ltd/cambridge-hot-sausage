@@ -14,9 +14,10 @@ class ProductImageSerializer(serializers.ModelSerializer):
         if not obj.image:
             return None
         url = obj.image.url
-        if url.startswith("http"):
-            return url
-        request = self.context.get("request")
-        if request:
-            return request.build_absolute_uri(url)
+        # S3/Cloudinary storages return an absolute URL — pass through.
+        # Local FileSystemStorage returns a relative /media/... path; keep
+        # it relative so the browser resolves it against the current
+        # origin. Can't use request.build_absolute_uri here because Next.js
+        # rewrites rewrite the Host header to the internal docker name
+        # (backend:8000), which browsers can't resolve.
         return url
