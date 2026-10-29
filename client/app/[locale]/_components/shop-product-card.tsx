@@ -117,7 +117,7 @@ export function ShopProductCard({ product }: ShopProductCardProps) {
             <div className="flex items-center gap-1 text-xs text-brand-ink/55">
               <Star size={13} fill="currentColor" className="text-brand-gold" />
               <span className="font-medium text-brand-ink">
-                {product.average_rating}
+                {Number(product.average_rating).toFixed(1)}
               </span>
               <span>({product.review_count})</span>
             </div>

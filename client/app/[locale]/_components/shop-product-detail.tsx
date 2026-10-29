@@ -169,7 +169,7 @@ export function ShopProductDetail({ product }: ShopProductDetailProps) {
                     ))}
                   </div>
                   <span className="text-sm text-brand-ink/55">
-                    {product.average_rating} ({product.review_count})
+                    {Number(product.average_rating).toFixed(1)} ({product.review_count})
                   </span>
                 </div>
               )}
