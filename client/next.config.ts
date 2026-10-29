@@ -36,8 +36,10 @@ const nextConfig: NextConfig = {
       { source: "/api/:path*", destination: `${API_URL}/api/:path*` },
       { source: "/media/:path*", destination: `${API_URL}/media/:path*` },
       { source: "/static/:path*", destination: `${API_URL}/static/:path*` },
-      { source: "/admin/:path*", destination: `${API_URL}/admin/:path*` },
-      { source: "/admin", destination: `${API_URL}/admin/` },
+      // /admin/* belongs to the Next.js app (custom React admin).
+      // Django's superuser admin was moved to /django-admin/.
+      { source: "/django-admin/:path*", destination: `${API_URL}/django-admin/:path*` },
+      { source: "/django-admin", destination: `${API_URL}/django-admin/` },
     ];
   },
 };

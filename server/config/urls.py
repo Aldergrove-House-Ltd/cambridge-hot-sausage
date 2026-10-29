@@ -4,7 +4,9 @@ from django.urls import include, path, re_path
 from django.views.static import serve
 
 urlpatterns = [
-    path("admin/", admin.site.urls),
+    # Django's own admin lives under /django-admin/ so Next.js can own
+    # the user-facing /admin/* routes (custom React admin UI).
+    path("django-admin/", admin.site.urls),
     path("api/v1/shop/", include("shop.urls")),
     path("api/v1/orders/", include("orders.urls")),
     path("api/v1/contact", include("contact.urls")),
