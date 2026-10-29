@@ -16,14 +16,15 @@ RUN pip install --no-cache-dir -r requirements.txt gunicorn psycopg2-binary
 COPY . .
 
 RUN chmod +x entrypoint.sh
-RUN python manage.py collectstatic --noinput 2>/dev/null || true
 
-# Run as non-root for defence-in-depth.
+# Run as non-root for defence-in-depth. collectstatic runs at container start
+# (in entrypoint.sh) so it has SECRET_KEY from the runtime env.
 RUN addgroup --system django && \
-    adduser --system --ingroup django --no-create-home django && \
-    mkdir -p /app/db /app/media && \
+    adduser --system --ingroup django --home /app django && \
+    mkdir -p /app/db /app/media /app/staticfiles && \
     chown -R django:django /app
 USER django
+ENV HOME=/app
 
 EXPOSE 8000
 
