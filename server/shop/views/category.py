@@ -1,4 +1,5 @@
 from django.core.cache import cache
+from mptt.utils import get_cached_trees
 from rest_framework import viewsets
 from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
@@ -25,10 +26,12 @@ class CategoryViewSet(viewsets.ReadOnlyModelViewSet):
     lookup_field = "slug"
 
     def get_queryset(self):
+        # Standard QuerySet used by retrieve + DRF plumbing. list() builds
+        # the hydrated tree separately below.
         return (
             Category.objects
             .filter(is_active=True, parent__isnull=True)
-            .prefetch_related("children", "products")
+            .select_related("parent")
         )
 
     def list(self, request, *args, **kwargs):
@@ -37,10 +40,19 @@ class CategoryViewSet(viewsets.ReadOnlyModelViewSet):
         cached = cache.get(cache_key)
         if cached is not None:
             return Response(cached)
-        response = super().list(request, *args, **kwargs)
-        if response.status_code == 200:
-            cache.set(cache_key, response.data, CACHE_TTL)
-        return response
+        # Load the full active tree in ONE query and hydrate children in
+        # memory via MPTT's get_cached_trees — recursive serialization
+        # becomes O(1) queries instead of O(N).
+        all_active = (
+            Category.objects
+            .filter(is_active=True)
+            .select_related("parent")
+            .order_by("tree_id", "lft")
+        )
+        roots = get_cached_trees(all_active)
+        data = self.get_serializer(roots, many=True).data
+        cache.set(cache_key, data, CACHE_TTL)
+        return Response(data)
 
     def retrieve(self, request, *args, **kwargs):
         version = get_categories_version()

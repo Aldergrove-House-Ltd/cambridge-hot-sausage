@@ -14,7 +14,14 @@ class AdminCategorySerializer(serializers.ModelSerializer):
         return AdminCategorySerializer(obj.get_children(), many=True).data
 
     def get_product_count(self, obj):
-        return obj.products.count()
+        from shop.models import Product
+        descendant_ids = obj.get_descendants(include_self=True).values("id")
+        return (
+            Product.objects
+            .filter(categories__in=descendant_ids)
+            .distinct()
+            .count()
+        )
 
 
 class AdminCategoryWriteSerializer(serializers.ModelSerializer):
