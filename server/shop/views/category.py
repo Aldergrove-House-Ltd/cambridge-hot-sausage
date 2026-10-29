@@ -50,7 +50,15 @@ class CategoryViewSet(viewsets.ReadOnlyModelViewSet):
             .order_by("tree_id", "lft")
         )
         roots = get_cached_trees(all_active)
-        data = self.get_serializer(roots, many=True).data
+        results = self.get_serializer(roots, many=True).data
+        # Match DRF's PageNumberPagination envelope so the frontend's
+        # existing `data.results` consumer keeps working.
+        data = {
+            "count": len(results),
+            "next": None,
+            "previous": None,
+            "results": results,
+        }
         cache.set(cache_key, data, CACHE_TTL)
         return Response(data)
 
