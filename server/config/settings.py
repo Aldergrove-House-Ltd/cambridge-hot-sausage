@@ -38,6 +38,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
+    "whitenoise.middleware.WhiteNoiseMiddleware",
     "corsheaders.middleware.CorsMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
@@ -157,27 +158,33 @@ STATIC_ROOT = BASE_DIR / "staticfiles"
 MEDIA_URL = "media/"
 MEDIA_ROOT = BASE_DIR / "media"
 
-# ── Object Storage (Railway Bucket / S3-compatible) ─────────────
+# ── Storages ────────────────────────────────────────────────────
+# Static: whitenoise with compressed manifest storage (prod-safe, cache-busting).
+# Default (media): local FileSystemStorage; swapped to S3 if BUCKET_ENDPOINT is set.
+
+STORAGES = {
+    "default": {
+        "BACKEND": "django.core.files.storage.FileSystemStorage",
+    },
+    "staticfiles": {
+        "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
+    },
+}
 
 _bucket_endpoint = config("BUCKET_ENDPOINT", default="")
 
 if _bucket_endpoint:
-    STORAGES = {
-        "default": {
-            "BACKEND": "storages.backends.s3boto3.S3Boto3Storage",
-            "OPTIONS": {
-                "endpoint_url": _bucket_endpoint,
-                "access_key": config("BUCKET_ACCESS_KEY"),
-                "secret_key": config("BUCKET_SECRET_KEY"),
-                "bucket_name": config("BUCKET_NAME"),
-                "default_acl": "private",
-                "querystring_auth": True,
-                "querystring_expire": 3600,
-                "file_overwrite": False,
-            },
-        },
-        "staticfiles": {
-            "BACKEND": "django.contrib.staticfiles.storage.StaticFilesStorage",
+    STORAGES["default"] = {
+        "BACKEND": "storages.backends.s3boto3.S3Boto3Storage",
+        "OPTIONS": {
+            "endpoint_url": _bucket_endpoint,
+            "access_key": config("BUCKET_ACCESS_KEY"),
+            "secret_key": config("BUCKET_SECRET_KEY"),
+            "bucket_name": config("BUCKET_NAME"),
+            "default_acl": "private",
+            "querystring_auth": True,
+            "querystring_expire": 3600,
+            "file_overwrite": False,
         },
     }
 

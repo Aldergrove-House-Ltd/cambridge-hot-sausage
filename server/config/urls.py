@@ -14,6 +14,6 @@ urlpatterns = [
     path("api/v1/admin/", include("authentication.admin_urls")),
 ]
 
-# Serve media files in development
-if settings.DEBUG:
-    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+# Serve user-uploaded media through Django/Gunicorn.
+# Fine for low-traffic sites; swap to S3 (BUCKET_ENDPOINT) or a CDN once we outgrow it.
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
