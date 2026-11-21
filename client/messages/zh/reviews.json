@@ -8,24 +8,15 @@
     "subtitle": "来自本地人、游客和常客的真实评价，他们让这辆小推车成为了自己故事的一部分。"
   },
   "stats": {
-    "averageRating": "平均评分",
-    "totalReviews": "总评价数",
     "outOf": "满分5分"
-  },
-  "distribution": {
-    "star": "星",
-    "stars": "星"
   },
   "feed": {
     "eyebrow": "所有评价",
     "title": "听听他们怎么说",
     "filterAll": "全部",
     "filterStar": "{count} 星",
-    "filterOneStar": "1 星",
-    "noResults": "没有符合此筛选条件的评价。",
     "readMore": "阅读更多",
-    "readLess": "收起",
-    "verified": "已验证评价"
+    "readLess": "收起"
   },
   "cta": {
     "title": "尝过我们的热狗吗？",

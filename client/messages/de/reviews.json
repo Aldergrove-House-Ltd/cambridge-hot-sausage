@@ -8,24 +8,15 @@
     "subtitle": "Echte Bewertungen von Einheimischen, Touristen und Stammgästen, die den Barrow zu einem Teil ihrer Geschichte gemacht haben."
   },
   "stats": {
-    "averageRating": "Durchschnittliche Bewertung",
-    "totalReviews": "Bewertungen insgesamt",
     "outOf": "von 5"
-  },
-  "distribution": {
-    "star": "Stern",
-    "stars": "Sterne"
   },
   "feed": {
     "eyebrow": "Alle Bewertungen",
     "title": "Hören Sie es von ihnen",
     "filterAll": "Alle",
     "filterStar": "{count} Sterne",
-    "filterOneStar": "1 Stern",
-    "noResults": "Keine Bewertungen entsprechen diesem Filter.",
     "readMore": "Mehr lesen",
-    "readLess": "Weniger lesen",
-    "verified": "Verifizierte Bewertung"
+    "readLess": "Weniger lesen"
   },
   "cta": {
     "title": "Unsere Hot Dogs probiert?",

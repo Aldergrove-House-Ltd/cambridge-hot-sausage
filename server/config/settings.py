@@ -32,6 +32,7 @@ INSTALLED_APPS = [
     "newsletter.apps.NewsletterConfig",
     "events.apps.EventsConfig",
     "authentication.apps.AuthenticationConfig",
+    "reviews.apps.ReviewsConfig",
 ]
 
 # ── Middleware ───────────────────────────────────────────────────
@@ -224,6 +225,7 @@ REST_FRAMEWORK = {
     "DEFAULT_THROTTLE_RATES": {
         "anon": "60/minute",
         "user": "120/minute",
+        "google_reviews": "30/minute",
     },
     # Public endpoints are the default and never need DRF to touch the
     # Django session. Admin viewsets opt into SessionAuthentication
@@ -246,6 +248,21 @@ CSRF_TRUSTED_ORIGINS = config("CSRF_TRUSTED_ORIGINS", default="http://localhost:
 STRIPE_SECRET_KEY = config("STRIPE_SECRET_KEY", default="")
 STRIPE_WEBHOOK_SECRET = config("STRIPE_WEBHOOK_SECRET", default="")
 FRONTEND_URL = config("FRONTEND_URL", default="http://localhost:3000")
+
+# ── Google reviews (Places API) ─────────────────────────────────
+
+GOOGLE_PLACES_API_KEY = config("GOOGLE_PLACES_API_KEY", default="")
+# The Fitzroy Street barrow's Google listing. Place IDs may be stored
+# indefinitely under Google's terms (review content may not — see reviews/google.py).
+# (`or` also covers the variable being set but empty, e.g. by docker compose.)
+GOOGLE_PLACE_ID = config("GOOGLE_PLACE_ID", default="") or "ChIJq5PzhJFw2EcRee37KSu0yDI"
+# How often Google is actually called (default 6 h, roughly 120 calls a month).
+GOOGLE_REVIEWS_CACHE_SECONDS = config("GOOGLE_REVIEWS_CACHE_SECONDS", default=6 * 60 * 60, cast=int)
+# Last good result, served while Google fails or the monthly cap is reached.
+GOOGLE_REVIEWS_STALE_SECONDS = config("GOOGLE_REVIEWS_STALE_SECONDS", default=48 * 60 * 60, cast=int)
+# Hard ceiling on billed Place Details calls per month (the free tier is
+# about 1,000). Dev gets less: runserver restarts clear its in-memory cache.
+GOOGLE_PLACES_MONTHLY_CAP = config("GOOGLE_PLACES_MONTHLY_CAP", default=100 if DEBUG else 600, cast=int)
 
 # ── Security hardening (prod only) ─────────────────────────────
 

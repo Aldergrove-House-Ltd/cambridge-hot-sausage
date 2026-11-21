@@ -14,6 +14,7 @@ urlpatterns = [
     path("api/v1/events/", include("events.urls")),
     path("api/v1/auth/", include("authentication.urls")),
     path("api/v1/admin/", include("authentication.admin_urls")),
+    path("api/v1/reviews/", include("reviews.urls")),
     # Django's static() helper is a no-op when DEBUG=False, so register serve
     # directly. Fine for low-traffic; swap to S3 (BUCKET_ENDPOINT) later.
     re_path(r"^media/(?P<path>.*)$", serve, {"document_root": settings.MEDIA_ROOT}),

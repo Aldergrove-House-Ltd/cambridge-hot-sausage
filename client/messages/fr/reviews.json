@@ -8,24 +8,15 @@
     "subtitle": "De vrais avis de locaux, touristes et habitués qui ont fait du barrow une partie de leur histoire."
   },
   "stats": {
-    "averageRating": "Note moyenne",
-    "totalReviews": "Nombre d'avis",
     "outOf": "sur 5"
-  },
-  "distribution": {
-    "star": "étoile",
-    "stars": "étoiles"
   },
   "feed": {
     "eyebrow": "Tous les avis",
     "title": "Écoutez-les",
     "filterAll": "Tous",
     "filterStar": "{count} Étoiles",
-    "filterOneStar": "1 Étoile",
-    "noResults": "Aucun avis ne correspond à ce filtre.",
     "readMore": "Lire plus",
-    "readLess": "Lire moins",
-    "verified": "Avis vérifié"
+    "readLess": "Lire moins"
   },
   "cta": {
     "title": "Vous avez goûté nos hot dogs ?",

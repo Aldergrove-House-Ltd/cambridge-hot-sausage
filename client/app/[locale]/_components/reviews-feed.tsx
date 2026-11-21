@@ -4,7 +4,7 @@ import { useCallback, useMemo, useRef, useState } from "react";
 import { useTranslations } from "next-intl";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
-import { ArrowRight, CheckCircle, Star, Quote } from "lucide-react";
+import { ArrowRight, ArrowUpRight, Star, Quote } from "lucide-react";
 import type { Review, ReviewSummary } from "@/types/review";
 
 /* ─── Helpers ────────────────────────────────────────────────── */
@@ -90,15 +90,22 @@ function FilterPill({ label, active, count, onClick }: FilterPillProps) {
 
 /* ─── Single review card ─────────────────────────────────────── */
 
-interface ReviewCardProps {
-  review: Review;
-  verifiedLabel: string;
-}
-
-function ReviewCard({ review, verifiedLabel }: ReviewCardProps) {
+function ReviewCard({ review }: { review: Review }) {
   const [expanded, setExpanded] = useState(false);
   const t = useTranslations("reviews.feed");
   const shouldTruncate = review.text.length > 180;
+  const authorName = review.author_url ? (
+    <a
+      href={review.author_url}
+      target="_blank"
+      rel="noopener noreferrer"
+      className="transition-colors hover:text-brand-maroon"
+    >
+      {review.author_name}
+    </a>
+  ) : (
+    review.author_name
+  );
 
   return (
     <article className="group relative flex flex-col overflow-hidden rounded-2xl border border-brand-maroon/8 bg-white/60 p-5 shadow-[0_2px_12px_-4px_rgba(90,31,31,0.06)] backdrop-blur-sm transition-[transform,border-color,box-shadow] duration-500 ease-out hover:-translate-y-1 hover:border-brand-maroon/20 hover:shadow-[0_12px_40px_-12px_rgba(90,31,31,0.12)] sm:p-6">
@@ -118,28 +125,38 @@ function ReviewCard({ review, verifiedLabel }: ReviewCardProps) {
 
       {/* Author row */}
       <div className="flex items-center gap-3">
-        <div
-          className={`inline-flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-full text-sm font-bold ${initialsColor(review.author_name)}`}
-        >
-          {getInitials(review.author_name)}
-        </div>
+        {review.profile_photo_url ? (
+          // Plain <img>: Google's photo URLs are loaded straight from Google
+          // (not re-hosted by Next's optimiser), and need no-referrer.
+          // eslint-disable-next-line @next/next/no-img-element
+          <img
+            src={review.profile_photo_url}
+            alt=""
+            width={40}
+            height={40}
+            loading="lazy"
+            referrerPolicy="no-referrer"
+            className="h-10 w-10 flex-shrink-0 rounded-full object-cover"
+          />
+        ) : (
+          <div
+            className={`inline-flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-full text-sm font-bold ${initialsColor(review.author_name)}`}
+          >
+            {getInitials(review.author_name)}
+          </div>
+        )}
         <div className="min-w-0 flex-1">
-          <p className="truncate text-sm font-semibold text-brand-ink">
-            {review.author_name}
-          </p>
+          <p className="truncate text-sm font-semibold text-brand-ink">{authorName}</p>
           <p className="text-xs text-brand-ink/45">
             {review.relative_time_description}
           </p>
         </div>
       </div>
 
-      {/* Stars + verified */}
+      {/* Stars + source */}
       <div className="mt-3 flex items-center gap-2">
         <StarRatingSmall rating={review.rating} />
-        <span className="inline-flex items-center gap-1 text-[10px] font-medium text-brand-sage">
-          <CheckCircle size={11} strokeWidth={2} />
-          {verifiedLabel}
-        </span>
+        <span className="text-[10px] font-medium text-brand-sage">{t("googleReview")}</span>
       </div>
 
       {/* Review text */}
@@ -159,13 +176,25 @@ function ReviewCard({ review, verifiedLabel }: ReviewCardProps) {
           </button>
         )}
       </div>
+
+      {review.review_url && (
+        <a
+          href={review.review_url}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="mt-4 inline-flex items-center gap-1 self-start text-xs font-medium text-brand-ink/45 transition-colors hover:text-brand-maroon"
+        >
+          {t("viewOnGoogle")}
+          <ArrowUpRight size={12} strokeWidth={2} />
+        </a>
+      )}
     </article>
   );
 }
 
 /* ─── CTA Section ────────────────────────────────────────────── */
 
-function ReviewsCta() {
+function ReviewsCta({ writeReviewUrl }: { writeReviewUrl: string }) {
   const t = useTranslations("reviews.cta");
 
   return (
@@ -190,8 +219,10 @@ function ReviewsCta() {
           {t("subtitle")}
         </p>
         <div data-reveal style={{ animationDelay: "200ms" }} className="mt-8">
-          <button
-            type="button"
+          <a
+            href={writeReviewUrl}
+            target="_blank"
+            rel="noopener noreferrer"
             className="group inline-flex items-center gap-3 rounded-full bg-brand-maroon px-8 py-4 text-sm font-semibold uppercase tracking-wider text-brand-cream shadow-[0_20px_45px_-15px_rgba(90,31,31,0.35)] transition-all duration-300 ease-out hover:scale-[1.04] hover:shadow-[0_30px_55px_-15px_rgba(90,31,31,0.5)] active:scale-100 sm:text-base"
           >
             <span>{t("button")}</span>
@@ -201,7 +232,7 @@ function ReviewsCta() {
             >
               <ArrowRight className="h-3.5 w-3.5" strokeWidth={2.6} />
             </span>
-          </button>
+          </a>
         </div>
       </div>
     </section>
@@ -225,6 +256,15 @@ export function ReviewsFeed({ reviews, summary }: ReviewsFeedProps) {
     if (activeFilter === null) return reviews;
     return reviews.filter((r) => r.rating === activeFilter);
   }, [reviews, activeFilter]);
+
+  // Reviews are already 4★/5★ only; offer a pill per rating that's present.
+  const starFilters = useMemo(
+    () =>
+      [5, 4]
+        .map((star) => ({ star, count: reviews.filter((r) => r.rating === star).length }))
+        .filter(({ count }) => count > 0),
+    [reviews],
+  );
 
   // Stagger cards on initial mount
   useGSAP(
@@ -299,53 +339,76 @@ export function ReviewsFeed({ reviews, summary }: ReviewsFeedProps) {
             </h2>
           </div>
 
-          {/* Filter pills */}
-          <div
-            data-reveal
-            style={{ animationDelay: "200ms" }}
-            className="mt-10 flex flex-wrap justify-center gap-2 sm:mt-12"
-          >
-            <FilterPill
-              label={t("feed.filterAll")}
-              active={activeFilter === null}
-              count={summary.totalRatings}
-              onClick={() => handleFilter(null)}
-            />
-            {[5, 4, 3, 2, 1].map((star) => (
+          {/* Filter pills — only when there's more than one rating to pick */}
+          {starFilters.length > 1 && (
+            <div
+              data-reveal
+              style={{ animationDelay: "200ms" }}
+              className="mt-10 flex flex-wrap justify-center gap-2 sm:mt-12"
+            >
               <FilterPill
-                key={star}
-                label={star === 1 ? t("feed.filterOneStar") : t("feed.filterStar", { count: star })}
-                active={activeFilter === star}
-                count={summary.distribution[star - 1]}
-                onClick={() => handleFilter(star)}
+                label={t("feed.filterAll")}
+                active={activeFilter === null}
+                count={reviews.length}
+                onClick={() => handleFilter(null)}
               />
-            ))}
-          </div>
+              {starFilters.map(({ star, count }) => (
+                <FilterPill
+                  key={star}
+                  label={t("feed.filterStar", { count: star })}
+                  active={activeFilter === star}
+                  count={count}
+                  onClick={() => handleFilter(star)}
+                />
+              ))}
+            </div>
+          )}
 
           {/* Review grid */}
-          <div
-            ref={gridRef}
-            className="mt-10 grid gap-4 sm:mt-12 sm:grid-cols-2 lg:grid-cols-3"
-          >
-            {filtered.length > 0 ? (
-              filtered.map((review, i) => (
-                <div key={`${review.author_name}-${review.time}`} data-review-card>
-                  <ReviewCard
-                    review={review}
-                    verifiedLabel={t("feed.verified")}
-                  />
-                </div>
-              ))
-            ) : (
-              <div className="col-span-full py-16 text-center">
-                <p className="text-lg text-brand-ink/40">{t("feed.noResults")}</p>
+          {reviews.length > 0 ? (
+            <>
+              <div
+                ref={gridRef}
+                className="mt-10 grid gap-4 sm:mt-12 sm:grid-cols-2 lg:grid-cols-3"
+              >
+                {filtered.map((review) => (
+                  <div key={review.review_url || `${review.author_name}-${review.time}`} data-review-card>
+                    <ReviewCard review={review} />
+                  </div>
+                ))}
               </div>
-            )}
-          </div>
+              <p className="mt-10 text-center text-sm text-brand-ink/50">
+                {t("feed.note")}{" "}
+                <a
+                  href={summary.googleMapsUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="font-semibold text-brand-maroon underline-offset-4 hover:underline"
+                >
+                  {t("feed.readAll")}
+                </a>
+              </p>
+            </>
+          ) : (
+            <div className="mt-10 py-16 text-center sm:mt-12">
+              <p className="text-lg text-brand-ink/50">
+                {summary.available ? t("feed.empty") : t("feed.unavailable")}
+              </p>
+              <a
+                href={summary.googleMapsUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="mt-3 inline-flex items-center gap-1 text-sm font-semibold text-brand-maroon underline-offset-4 hover:underline"
+              >
+                {t("feed.readAll")}
+                <ArrowUpRight size={14} strokeWidth={2} />
+              </a>
+            </div>
+          )}
         </div>
       </section>
 
-      <ReviewsCta />
+      <ReviewsCta writeReviewUrl={summary.writeReviewUrl} />
     </>
   );
 }

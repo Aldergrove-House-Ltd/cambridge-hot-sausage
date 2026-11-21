@@ -8,24 +8,15 @@
     "subtitle": "地元の方、観光客、常連のお客様からの本物のレビュー。屋台を自分たちの物語の一部にしてくれた方々です。"
   },
   "stats": {
-    "averageRating": "平均評価",
-    "totalReviews": "レビュー総数",
     "outOf": "5点満点"
-  },
-  "distribution": {
-    "star": "つ星",
-    "stars": "つ星"
   },
   "feed": {
     "eyebrow": "すべてのレビュー",
     "title": "お客様の声をお聞きください",
     "filterAll": "すべて",
     "filterStar": "{count} つ星",
-    "filterOneStar": "1 つ星",
-    "noResults": "このフィルターに一致するレビューはありません。",
     "readMore": "続きを読む",
-    "readLess": "閉じる",
-    "verified": "確認済みレビュー"
+    "readLess": "閉じる"
   },
   "cta": {
     "title": "ホットドッグを食べましたか？",

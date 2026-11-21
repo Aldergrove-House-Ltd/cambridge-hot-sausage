@@ -8,24 +8,25 @@
     "subtitle": "Real reviews from locals, tourists and regulars who've made the barrow part of their story."
   },
   "stats": {
-    "averageRating": "Average rating",
-    "totalReviews": "Total reviews",
-    "outOf": "out of 5"
-  },
-  "distribution": {
-    "star": "star",
-    "stars": "stars"
+    "outOf": "out of 5",
+    "basedOn": "Based on {count, plural, one {# Google review} other {# Google reviews}}",
+    "seeAll": "See all on Google Maps",
+    "attribution": "Ratings and reviews from Google Maps",
+    "unavailable": "See what people are saying about us on Google Maps."
   },
   "feed": {
-    "eyebrow": "All reviews",
+    "eyebrow": "From Google Maps",
     "title": "Hear it from them",
     "filterAll": "All",
     "filterStar": "{count} Stars",
-    "filterOneStar": "1 Star",
-    "noResults": "No reviews match this filter.",
     "readMore": "Read more",
     "readLess": "Read less",
-    "verified": "Verified review"
+    "googleReview": "Google review",
+    "viewOnGoogle": "View on Google",
+    "note": "Our latest 4 and 5-star reviews from Google Maps.",
+    "readAll": "Read every review on Google Maps",
+    "empty": "No reviews to show just yet.",
+    "unavailable": "We couldn't load our Google reviews just now."
   },
   "cta": {
     "title": "Tried our hot dogs?",

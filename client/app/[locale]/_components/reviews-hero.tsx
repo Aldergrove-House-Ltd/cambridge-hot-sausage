@@ -4,7 +4,7 @@ import { useRef } from "react";
 import { useTranslations } from "next-intl";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
-import { Star } from "lucide-react";
+import { ArrowUpRight, Star } from "lucide-react";
 import type { ReviewSummary } from "@/types/review";
 
 interface ReviewsHeroProps {
@@ -41,78 +41,46 @@ function StarRating({ rating, size = 20 }: { rating: number; size?: number }) {
   );
 }
 
+function GoogleMapsLink({ href, label }: { href: string; label: string }) {
+  return (
+    <a
+      href={href}
+      target="_blank"
+      rel="noopener noreferrer"
+      className="group inline-flex items-center gap-2 rounded-full bg-brand-gold px-5 py-2.5 text-sm font-semibold text-brand-maroon transition-transform duration-300 ease-out hover:scale-[1.03] active:scale-100"
+    >
+      {label}
+      <ArrowUpRight
+        className="h-4 w-4 transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
+        strokeWidth={2.2}
+      />
+    </a>
+  );
+}
+
 export function ReviewsHero({ summary }: ReviewsHeroProps) {
   const t = useTranslations("reviews");
   const sectionRef = useRef<HTMLElement>(null);
   const ratingRef = useRef<HTMLSpanElement>(null);
-  const countRef = useRef<HTMLSpanElement>(null);
-  const barsRef = useRef<HTMLDivElement>(null);
+  const rating = summary.available ? summary.averageRating : null;
 
+  // Count the big rating up from 0.0
   useGSAP(
     () => {
-      if (!ratingRef.current || !countRef.current || !barsRef.current) return;
-
-      const tl = gsap.timeline({
-        defaults: { ease: "power3.out" },
+      if (!ratingRef.current || rating === null) return;
+      const counter = { value: 0 };
+      gsap.to(counter, {
+        value: rating,
+        duration: 1.4,
         delay: 0.3,
-      });
-
-      // Animate the big rating number counting up
-      tl.fromTo(
-        ratingRef.current,
-        { textContent: "0.0" },
-        {
-          duration: 1.4,
-          ease: "power2.out",
-          onUpdate() {
-            const progress = tl.progress();
-            const current = (summary.averageRating * Math.min(progress * 2.5, 1)).toFixed(1);
-            if (ratingRef.current) ratingRef.current.textContent = current;
-          },
+        ease: "power2.out",
+        onUpdate() {
+          if (ratingRef.current) ratingRef.current.textContent = counter.value.toFixed(1);
         },
-        0,
-      );
-
-      // Animate total count
-      tl.fromTo(
-        countRef.current,
-        { textContent: "0" },
-        {
-          duration: 1.2,
-          ease: "power2.out",
-          onUpdate() {
-            const progress = tl.progress();
-            const current = Math.round(summary.totalRatings * Math.min(progress * 2, 1));
-            if (countRef.current) countRef.current.textContent = String(current);
-          },
-        },
-        0,
-      );
-
-      // Animate distribution bars
-      const bars = barsRef.current.querySelectorAll<HTMLElement>("[data-bar]");
-      const maxCount = Math.max(...summary.distribution);
-
-      bars.forEach((bar, i) => {
-        const starIndex = 4 - i; // bars render 5-star first
-        const percentage = maxCount > 0 ? (summary.distribution[starIndex] / maxCount) * 100 : 0;
-
-        gsap.fromTo(
-          bar,
-          { width: "0%" },
-          {
-            width: `${percentage}%`,
-            duration: 1,
-            ease: "power3.out",
-            delay: 0.5 + i * 0.08,
-          },
-        );
       });
     },
     { scope: sectionRef },
   );
-
-  const maxCount = Math.max(...summary.distribution);
 
   return (
     <section
@@ -157,55 +125,41 @@ export function ReviewsHero({ summary }: ReviewsHeroProps) {
           style={{ animationDelay: "350ms" }}
           className="mx-auto mt-12 max-w-2xl overflow-hidden rounded-3xl border border-brand-gold/20 bg-brand-cream/[0.04] p-6 backdrop-blur-sm sm:mt-16 sm:p-8"
         >
-          <div className="flex flex-col items-center gap-8 sm:flex-row sm:gap-10">
-            {/* Big rating */}
-            <div className="flex flex-col items-center gap-2 sm:min-w-[140px]">
-              <span
-                ref={ratingRef}
-                className="font-display text-6xl leading-none text-brand-gold sm:text-7xl"
-              >
-                {summary.averageRating.toFixed(1)}
-              </span>
-              <StarRating rating={summary.averageRating} size={22} />
-              <span className="mt-1 text-xs text-brand-cream/50">
-                {t("stats.outOf")}
-              </span>
-            </div>
+          {rating !== null ? (
+            <div className="flex flex-col items-center gap-8 sm:flex-row sm:gap-10">
+              {/* Big rating */}
+              <div className="flex flex-col items-center gap-2 sm:min-w-[140px]">
+                <span
+                  ref={ratingRef}
+                  className="font-display text-6xl leading-none text-brand-gold sm:text-7xl"
+                >
+                  {rating.toFixed(1)}
+                </span>
+                <StarRating rating={rating} size={22} />
+                <span className="mt-1 text-xs text-brand-cream/50">
+                  {t("stats.outOf")}
+                </span>
+              </div>
 
-            {/* Divider */}
-            <div className="hidden h-24 w-px bg-brand-gold/15 sm:block" />
-            <div className="h-px w-32 bg-brand-gold/15 sm:hidden" />
+              {/* Divider */}
+              <div className="hidden h-24 w-px bg-brand-gold/15 sm:block" />
+              <div className="h-px w-32 bg-brand-gold/15 sm:hidden" />
 
-            {/* Distribution bars */}
-            <div ref={barsRef} className="flex-1 space-y-2">
-              {[5, 4, 3, 2, 1].map((star, i) => {
-                const count = summary.distribution[star - 1];
-                return (
-                  <div key={star} className="flex items-center gap-3">
-                    <span className="flex w-12 items-center justify-end gap-1 text-xs text-brand-cream/65">
-                      {star}
-                      <Star size={11} fill="currentColor" className="text-brand-gold/70" />
-                    </span>
-                    <div className="relative h-2.5 flex-1 overflow-hidden rounded-full bg-brand-cream/[0.06]">
-                      <div
-                        data-bar
-                        className="absolute inset-y-0 left-0 rounded-full bg-gradient-to-r from-brand-gold/80 to-brand-gold"
-                        style={{
-                          width: maxCount > 0 ? `${(count / maxCount) * 100}%` : "0%",
-                        }}
-                      />
-                    </div>
-                    <span className="w-6 text-right text-xs tabular-nums text-brand-cream/50">
-                      {count}
-                    </span>
-                  </div>
-                );
-              })}
-              <p className="pt-1 text-right text-xs text-brand-cream/45">
-                <span ref={countRef}>{summary.totalRatings}</span> {t("stats.totalReviews").toLowerCase()}
-              </p>
+              {/* Count + link to every review on Google */}
+              <div className="flex flex-1 flex-col items-center gap-4 text-center sm:items-start sm:text-left">
+                <p className="text-lg text-brand-cream sm:text-xl">
+                  {t("stats.basedOn", { count: summary.totalRatings ?? 0 })}
+                </p>
+                <GoogleMapsLink href={summary.googleMapsUrl} label={t("stats.seeAll")} />
+                <p className="text-xs text-brand-cream/45">{t("stats.attribution")}</p>
+              </div>
             </div>
-          </div>
+          ) : (
+            <div className="flex flex-col items-center gap-4 text-center">
+              <p className="text-lg text-brand-cream">{t("stats.unavailable")}</p>
+              <GoogleMapsLink href={summary.googleMapsUrl} label={t("stats.seeAll")} />
+            </div>
+          )}
         </div>
       </div>
     </section>
