@@ -40,7 +40,7 @@ export default function LoginPage() {
           <h1 className="mt-4 font-[family-name:var(--font-rye)] text-2xl text-[#F5F1E8]">
             Admin
           </h1>
-          <p className="mt-1 text-sm text-white/50">Cambridge Hot Sausage</p>
+          <p className="mt-1 text-sm text-white/50">The Hot Sausage Company</p>
         </div>
 
         {/* Form */}

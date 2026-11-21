@@ -6,6 +6,7 @@ import { Search } from "lucide-react";
 import { useFilteredProducts } from "@/lib/shop/hooks";
 import type { Category, PaginatedResponse, ProductListItem } from "@/types/shop";
 import { ShopProductCard } from "./shop-product-card";
+import { PROMO_CATEGORY_SLUGS, ShopPromos, type PromoKey } from "./shop-promos";
 
 interface ShopListingProps {
   initialCategories: Category[];
@@ -19,6 +20,7 @@ export function ShopListing({ initialCategories, initialProducts }: ShopListingP
   const [search, setSearch] = useState("");
   const [debouncedSearch, setDebouncedSearch] = useState("");
   const debounceRef = useRef<ReturnType<typeof setTimeout>>(undefined);
+  const filtersRef = useRef<HTMLDivElement>(null);
 
   function handleSearch(value: string) {
     setSearch(value);
@@ -64,6 +66,17 @@ export function ShopListing({ initialCategories, initialProducts }: ShopListingP
     }
   }
 
+  // Promo buttons select their category when it exists, then bring the
+  // filters + grid into view.
+  function handlePromoShop(key: PromoKey) {
+    const match = initialCategories.find((c) => PROMO_CATEGORY_SLUGS[key].includes(c.slug));
+    if (match) {
+      setActiveParent(match.slug);
+      setActiveChild(null);
+    }
+    filtersRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+  }
+
   function handleChildClick(slug: string) {
     if (slug === activeChild) {
       // Deselect child → show parent category
@@ -87,37 +100,46 @@ export function ShopListing({ initialCategories, initialProducts }: ShopListingP
           <h1
             data-reveal
             style={{ animationDelay: "100ms" }}
-            className="mt-3 font-display text-4xl text-brand-maroon sm:text-5xl lg:text-6xl"
+            className="mx-auto mt-3 max-w-4xl text-balance font-display text-4xl text-brand-maroon sm:text-5xl lg:text-6xl"
           >
             {t("title")}
           </h1>
-          <p
+          <div
             data-reveal
             style={{ animationDelay: "200ms" }}
-            className="mx-auto mt-4 max-w-xl text-balance text-base text-brand-ink/60 sm:text-lg"
+            className="mx-auto mt-4 max-w-xl space-y-3 text-balance text-base text-brand-ink/60 sm:text-lg"
           >
-            {t("subtitle")}
-          </p>
+            {t("subtitle")
+              .split("\n\n")
+              .map((paragraph) => (
+                <p key={paragraph}>{paragraph}</p>
+              ))}
+          </div>
         </div>
 
-        {/* Search bar */}
-        <div
-          data-reveal
-          style={{ animationDelay: "300ms" }}
-          className="mx-auto mt-10 max-w-md sm:mt-12"
-        >
-          <div className="relative">
-            <Search
-              className="absolute left-4 top-1/2 h-4 w-4 -translate-y-1/2 text-brand-ink/35"
-              strokeWidth={2}
-            />
-            <input
-              type="text"
-              value={search}
-              onChange={(e) => handleSearch(e.target.value)}
-              placeholder={t("search")}
-              className="w-full rounded-full border border-brand-maroon/10 bg-white/70 py-3 pl-11 pr-4 text-sm text-brand-ink placeholder:text-brand-ink/35 backdrop-blur-sm transition-[border-color,box-shadow] duration-300 focus:border-brand-maroon/30 focus:outline-none focus:ring-4 focus:ring-brand-maroon/5"
-            />
+        <ShopPromos onShop={handlePromoShop} />
+
+        {/* Search bar — the scroll target is the un-animated wrapper, so the
+            reveal transform on the inner box can't skew the scroll position */}
+        <div ref={filtersRef} className="mt-12 scroll-mt-28 sm:mt-16">
+          <div
+            data-reveal
+            style={{ animationDelay: "300ms" }}
+            className="mx-auto max-w-md"
+          >
+            <div className="relative">
+              <Search
+                className="absolute left-4 top-1/2 h-4 w-4 -translate-y-1/2 text-brand-ink/35"
+                strokeWidth={2}
+              />
+              <input
+                type="text"
+                value={search}
+                onChange={(e) => handleSearch(e.target.value)}
+                placeholder={t("search")}
+                className="w-full rounded-full border border-brand-maroon/10 bg-white/70 py-3 pl-11 pr-4 text-sm text-brand-ink placeholder:text-brand-ink/35 backdrop-blur-sm transition-[border-color,box-shadow] duration-300 focus:border-brand-maroon/30 focus:outline-none focus:ring-4 focus:ring-brand-maroon/5"
+              />
+            </div>
           </div>
         </div>
 

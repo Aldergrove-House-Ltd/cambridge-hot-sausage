@@ -10,15 +10,13 @@ import { Link, usePathname } from "@/i18n/navigation";
 import { useCart } from "@/lib/cart/context";
 import { LocaleSwitcher } from "./locale-switcher";
 
-type NavKey = "home" | "about" | "shop" | "locations" | "events" | "reviews" | "contact";
+type NavKey = "about" | "events" | "shop" | "contact";
 
+// The logo is the home link; Locations and Reviews live in the footer only.
 const NAV_ITEMS: { key: NavKey; href: string }[] = [
-  { key: "home", href: "/" },
   { key: "about", href: "/about" },
-  { key: "shop", href: "/shop" },
-  { key: "locations", href: "/locations" },
   { key: "events", href: "/events" },
-  { key: "reviews", href: "/reviews" },
+  { key: "shop", href: "/shop" },
   { key: "contact", href: "/contact" },
 ];
 
@@ -225,7 +223,16 @@ export function Navbar() {
         className="fixed inset-0 top-0 z-[100] hidden flex-col bg-brand-cream/97 backdrop-blur-2xl lg:hidden"
         style={{ display: "none" }}
       >
-        <div className="flex h-[68px] items-center justify-end px-4 sm:px-6">
+        <div className="flex h-[68px] items-center justify-between px-4 sm:px-6">
+          {/* The drawer covers the header, so repeat the logo here as the home link */}
+          <Link
+            href="/"
+            onClick={() => setOpen(false)}
+            className="flex items-center"
+            aria-label={t("brand")}
+          >
+            <Image src={logo} alt={t("brand")} className="h-12 w-auto" />
+          </Link>
           <button
             type="button"
             onClick={() => setOpen(false)}

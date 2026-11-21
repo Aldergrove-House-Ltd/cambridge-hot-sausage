@@ -14,7 +14,7 @@ export async function generateMetadata({
   return {
     ...pageMetadata({
       title: t("title"),
-      description: "Thanks for your order from Cambridge Hot Sausage.",
+      description: "Thanks for your order from The Hot Sausage Company.",
       path: "/checkout/success",
       locale,
     }),

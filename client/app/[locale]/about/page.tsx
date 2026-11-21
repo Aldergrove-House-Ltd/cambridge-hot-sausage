@@ -14,7 +14,7 @@ export async function generateMetadata({
   return pageMetadata({
     title: t("title"),
     description:
-      "Cambridge Hot Sausage has served the city's famous hot dogs from a Victorian-style barrow on Fitzroy Street since 1986. Meet the family, the recipe, and the regulars.",
+      "The Hot Sausage Company has served the city's famous hot dogs from a Victorian-style barrow on Fitzroy Street since 1986. Meet the family, the recipe, and the regulars.",
     path: "/about",
     locale,
   });

@@ -1,5 +1,5 @@
 {
-  "brand": "Cambridge Hot Sausage",
+  "brand": "The Hot Sausage Company",
   "tagline": "Est. 1986 · Fitzroy Street",
   "nav": {
     "home": "Home",
@@ -11,8 +11,8 @@
     "contact": "Contact"
   },
   "actions": {
-    "visitShop": "Visit shop",
-    "bookEvent": "Book an event",
+    "visitShop": "Shop our merchandise",
+    "bookEvent": "Book the barrow",
     "openMenu": "Open menu",
     "closeMenu": "Close menu",
     "changeLanguage": "Change language"

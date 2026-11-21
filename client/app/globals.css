@@ -45,12 +45,6 @@
     -webkit-font-smoothing: antialiased;
     text-rendering: optimizeLegibility;
   }
-  /* Force body to be its own isolated stacking/blend group so the
-     mix-blend-mode cursor renders deterministically above siblings */
-  body {
-    isolation: isolate;
-  }
-
   /* Brand-tinted native scrollbar (visible when Lenis isn't active) */
   html {
     scrollbar-color: #5a1f1f #f5f1e8;
@@ -71,83 +65,6 @@
   ::-webkit-scrollbar-thumb:hover {
     background: #2b2b2b;
   }
-}
-
-/* Custom cursor — only on fine pointers with motion enabled.
-
-   Wrapped in @layer utilities so this rule lands in the same layer
-   that HeroUI defines for utilities. CSS cascade layers have a quirk:
-   `!important` rules in *unlayered* CSS are treated as the LATEST
-   layer for important declarations, which makes them LOSE to
-   important rules in earlier named layers (like `components`).
-   Putting our overrides into `utilities` puts them after HeroUI's
-   `components` layer, so they win cleanly. */
-@layer utilities {
-  @media (pointer: fine) and (prefers-reduced-motion: no-preference) {
-    html.custom-cursor-on,
-    html.custom-cursor-on * {
-      cursor: none !important;
-    }
-  }
-}
-
-@layer utilities {
-  .custom-cursor-ring,
-  .custom-cursor-dot {
-    position: fixed !important;
-    top: 0 !important;
-    left: 0 !important;
-    pointer-events: none !important;
-    /* Max int — beat react-aria's inline z-index: 100000 on popovers,
-       HeroUI overlays, modal backdrops, and any third-party widget */
-    z-index: 2147483647 !important;
-    mix-blend-mode: difference;
-    will-change: transform, opacity;
-    display: none;
-  }
-  html.custom-cursor-on .custom-cursor-ring,
-  html.custom-cursor-on .custom-cursor-dot {
-    display: block;
-  }
-}
-
-.custom-cursor-ring {
-  width: 36px;
-  height: 36px;
-  border-radius: 9999px;
-  border: 1.5px solid #ffffff;
-  background-color: transparent;
-  /* Centering and position come from the JS-set transform
-     (translate3d + translate(-50%, -50%)). Don't add margins here
-     or the dot and ring will end up offset by different amounts. */
-  transition:
-    width 0.3s ease-out,
-    height 0.3s ease-out,
-    background-color 0.3s ease-out,
-    opacity 0.25s ease-out,
-    border-color 0.3s ease-out;
-}
-.custom-cursor-ring.cursor-hover {
-  width: 64px;
-  height: 64px;
-  background-color: rgba(255, 255, 255, 0.18);
-  border-color: #ffffff;
-}
-.custom-cursor-ring.cursor-down {
-  width: 28px;
-  height: 28px;
-}
-.custom-cursor-ring.cursor-hidden,
-.custom-cursor-dot.cursor-hidden {
-  opacity: 0;
-}
-
-.custom-cursor-dot {
-  width: 6px;
-  height: 6px;
-  border-radius: 9999px;
-  background: #ffffff;
-  transition: opacity 0.25s ease-out;
 }
 
 /* ─── Reveal on scroll ──────────────────────────────────────────────
@@ -244,6 +161,144 @@
   }
   [data-reveal][data-revealed] {
     animation: none;
+  }
+}
+
+/* ─── Hero: Cambridge sketch backdrop ───────────────────────────────
+   The stage is the hero's own box: a size container (so the sketch can be
+   sized in cq units) with a soft fade into the next section. Fades are CSS
+   masks, not SVG masks — those made the sketch ~50x slower to rasterise. */
+.hero-sketch-stage {
+  container-type: size;
+  -webkit-mask-image: linear-gradient(to bottom, #000 86%, transparent);
+  mask-image: linear-gradient(to bottom, #000 86%, transparent);
+}
+
+/* Geometry shared by the sketch frame and its mirrored side extensions.
+   --sketch-ratio (width / height) is set inline from the component; cq units
+   resolve against the stage (the hero box). */
+.hero-sketch {
+  /* Phones: cover the hero's full height, cropping the sides around the
+     chapel — the whole scene from towers to river fits vertically. */
+  --sketch-w: max(100cqw, 100cqh * var(--sketch-ratio));
+  --sketch-h: max(100cqh, 100cqw / var(--sketch-ratio));
+  --sketch-left: calc((100cqw - var(--sketch-w)) * 0.74);
+  --sketch-top: calc(100cqh - var(--sketch-h));
+}
+@media (min-width: 40rem) {
+  /* Wider screens: fit the band from the tower tips (15.5% down the
+     engraving) to the water below the punt (86%) into the hero, with the tips
+     just under the navbar. Whatever width is left over is filled by the
+     mirrored extensions. */
+  .hero-sketch {
+    --sketch-h: calc((100cqh - 5.75rem) / (0.86 - 0.155));
+    --sketch-w: calc(var(--sketch-h) * var(--sketch-ratio));
+    --sketch-left: calc((100cqw - var(--sketch-w)) / 2);
+    --sketch-top: calc(5.75rem - 0.155 * var(--sketch-h));
+  }
+}
+.hero-sketch-frame,
+.hero-sketch-mirror {
+  position: absolute;
+  top: var(--sketch-top);
+  left: var(--sketch-left);
+  width: var(--sketch-w);
+  height: var(--sketch-h);
+}
+/* Mirrored copies sit edge-to-edge with the frame, so the join is seamless.
+   Masks are in the copy's own (pre-flip) coordinates. */
+.hero-sketch-mirror {
+  scale: -1 1;
+}
+.hero-sketch-mirror-left {
+  /* Trees and bank, fading out towards the screen edge */
+  left: calc(var(--sketch-left) - var(--sketch-w));
+  -webkit-mask-image: linear-gradient(to right, #000 25%, transparent 90%);
+  mask-image: linear-gradient(to right, #000 25%, transparent 90%);
+}
+.hero-sketch-mirror-right {
+  /* Bridge and river only — a mirrored chapel end would read as twin towers */
+  left: calc(var(--sketch-left) + var(--sketch-w));
+  -webkit-mask-image:
+    linear-gradient(to left, #000 25%, transparent 90%),
+    linear-gradient(to bottom, transparent 52%, #000 64%);
+  -webkit-mask-composite: source-in;
+  mask-image:
+    linear-gradient(to left, #000 25%, transparent 90%),
+    linear-gradient(to bottom, transparent 52%, #000 64%);
+  mask-composite: intersect;
+}
+
+/* The sketch "inks in" from the bottom upwards: a soft-edged gradient mask
+   three times the element's height slides from its transparent end to its
+   opaque end. Applied to a hero-sized layer, so the sweep covers exactly
+   what's on screen. */
+.hero-sketch {
+  -webkit-mask-image: linear-gradient(to top, #000 45%, transparent 55%);
+  mask-image: linear-gradient(to top, #000 45%, transparent 55%);
+  -webkit-mask-size: 100% 300%;
+  mask-size: 100% 300%;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-position: 0 100%;
+  mask-position: 0 100%;
+  animation: hero-sketch-ink 2.8s cubic-bezier(0.22, 0.7, 0.2, 1) 0.2s both;
+}
+@keyframes hero-sketch-ink {
+  from {
+    -webkit-mask-position: 0 0%;
+    mask-position: 0 0%;
+  }
+  to {
+    -webkit-mask-position: 0 100%;
+    mask-position: 0 100%;
+  }
+}
+
+/* Sunlight glinting on the Cam — drifts downstream, then fades */
+.hero-glint {
+  stroke: var(--color-brand-gold);
+  stroke-width: 3;
+  stroke-linecap: round;
+  opacity: 0;
+  animation: hero-glint 7s ease-in-out infinite;
+}
+@keyframes hero-glint {
+  0% { opacity: 0; transform: translateX(-8px); }
+  45% { opacity: 0.95; }
+  100% { opacity: 0; transform: translateX(10px); }
+}
+
+/* Birds: fly across the full hero width, wings flapping */
+.hero-bird {
+  position: absolute;
+  left: 0;
+  animation: hero-bird-fly linear infinite;
+}
+.hero-bird svg {
+  display: block;
+  transform-origin: center;
+  animation: hero-bird-flap 0.9s ease-in-out infinite alternate;
+}
+@keyframes hero-bird-fly {
+  0% { transform: translate(-10vw, 0); }
+  50% { transform: translate(50vw, -14px); }
+  100% { transform: translate(110vw, 8px); }
+}
+@keyframes hero-bird-flap {
+  from { transform: scaleY(1); }
+  to { transform: scaleY(0.3); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-sketch {
+    animation: none;
+    -webkit-mask-image: none;
+    mask-image: none;
+  }
+  .hero-glint,
+  .hero-bird {
+    display: none;
   }
 }
 

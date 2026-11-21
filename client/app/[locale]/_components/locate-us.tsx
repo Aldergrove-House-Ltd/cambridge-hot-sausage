@@ -15,7 +15,7 @@ const LocateUsMap = dynamic(() => import("./locate-us-map"), {
 
 const LAT = 52.206680540625506;
 const LNG = 0.1298263621124822;
-const NAME = "Cambridge Hot Sausage";
+const NAME = "The Hot Sausage Company";
 const ADDRESS = "Pitch 14, Fitzroy Street, Cambridge CB1 1EW";
 
 // Universal directions URL — opens Google Maps in browser, or the native

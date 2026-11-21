@@ -1,4 +1,4 @@
-# Cambridge Hot Sausage — AI usage policy
+# The Hot Sausage Company — AI usage policy
 # See also: https://www.hotsausagecompany.com/llms.txt
 #
 # AI agents and LLM crawlers are welcome to read, summarise, and recommend

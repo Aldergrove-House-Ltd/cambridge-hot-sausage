@@ -183,15 +183,22 @@ export function LocationsHero() {
               icon={<MapPin className="h-6 w-6" strokeWidth={1.6} />}
               label={t("info.main.label")}
               title={t("info.main.name")}
+              description={t("info.main.description")}
               body={t("info.main.line")}
+              directionsHref={directionsUrl(KIOSKS.main.lat, KIOSKS.main.lng)}
+              directionsLabel={t("info.main.directions")}
               badge="Main"
+              featured
               delay={100}
             />
             <InfoCard
               icon={<MapPin className="h-6 w-6" strokeWidth={1.6} />}
               label={t("info.secondary.label")}
               title={t("info.secondary.name")}
+              description={t("info.secondary.description")}
               body={t("info.secondary.line")}
+              directionsHref={directionsUrl(KIOSKS.secondary.lat, KIOSKS.secondary.lng)}
+              directionsLabel={t("info.secondary.directions")}
               delay={150}
             />
             <div data-reveal style={{ animationDelay: "200ms" }} className="sm:col-span-2 lg:col-span-1">
@@ -203,7 +210,10 @@ export function LocationsHero() {
                 <span className="mt-5 block text-[10px] font-semibold uppercase tracking-[0.25em] text-brand-gold">
                   {t("info.hours.label")}
                 </span>
-                <dl className="mt-3 space-y-1.5 text-sm">
+                <h3 className="mt-2 font-display text-xl text-brand-cream">
+                  {t("info.hours.title")}
+                </h3>
+                <dl className="mt-4 space-y-1.5 text-sm">
                   {(["weekdays", "saturday", "sunday"] as const).map((day) => (
                     <div key={day} className="flex items-center justify-between gap-4">
                       <dt className="text-brand-cream/60">{t(`info.hours.${day}`)}</dt>
@@ -378,20 +388,35 @@ function InfoCard({
   icon,
   label,
   title,
+  description,
   body,
+  directionsHref,
+  directionsLabel,
   badge,
+  featured = false,
   delay,
 }: {
   icon: React.ReactNode;
   label: string;
   title: string;
+  description: string;
   body: string;
+  directionsHref: string;
+  directionsLabel: string;
   badge?: string;
+  /** The main location's card: stronger border, gold tint, filled button. */
+  featured?: boolean;
   delay: number;
 }) {
   return (
     <div data-reveal style={{ animationDelay: `${delay}ms` }}>
-      <div className="group relative h-full overflow-hidden rounded-2xl border border-brand-gold/25 bg-brand-cream/[0.04] p-6 backdrop-blur-sm transition-[transform,border-color,box-shadow] duration-500 ease-out hover:-translate-y-1 hover:border-brand-gold/50 hover:shadow-[0_12px_40px_-12px_rgba(236,214,145,0.2)] sm:p-7">
+      <div
+        className={`group relative flex h-full flex-col overflow-hidden rounded-2xl border p-6 backdrop-blur-sm transition-[transform,border-color,box-shadow] duration-500 ease-out hover:-translate-y-1 sm:p-7 ${
+          featured
+            ? "border-brand-gold/60 bg-brand-gold/[0.08] shadow-[0_18px_50px_-18px_rgba(236,214,145,0.35)] hover:border-brand-gold/80"
+            : "border-brand-gold/25 bg-brand-cream/[0.04] hover:border-brand-gold/50 hover:shadow-[0_12px_40px_-12px_rgba(236,214,145,0.2)]"
+        }`}
+      >
         <div aria-hidden className="pointer-events-none absolute inset-0 -z-10 bg-gradient-to-br from-brand-gold/0 via-brand-gold/0 to-brand-gold/[0.06] opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
         <div className="flex items-center gap-3">
           <div className="inline-flex h-12 w-12 items-center justify-center rounded-xl bg-brand-gold/15 text-brand-gold ring-1 ring-brand-gold/30">
@@ -407,9 +432,25 @@ function InfoCard({
           {label}
         </span>
         <h3 className="mt-2 font-display text-xl text-brand-cream">{title}</h3>
-        <address className="mt-1 text-sm not-italic leading-relaxed text-brand-cream/60">
+        <p className="mt-2 text-sm leading-relaxed text-brand-cream/75">{description}</p>
+        <address className="mt-3 text-sm not-italic leading-relaxed text-brand-cream/55">
           {body}
         </address>
+        <div className="mt-auto pt-6">
+          <a
+            href={directionsHref}
+            target="_blank"
+            rel="noopener noreferrer"
+            className={`inline-flex w-full items-center justify-center gap-2 text-balance rounded-full px-5 py-3 text-center text-sm font-semibold leading-snug transition-all duration-300 ease-out ${
+              featured
+                ? "bg-brand-gold text-brand-maroon hover:scale-[1.02] active:scale-100"
+                : "text-brand-gold ring-1 ring-brand-gold/40 hover:bg-brand-gold/10 hover:ring-brand-gold/70"
+            }`}
+          >
+            <Navigation className="h-4 w-4 flex-shrink-0" strokeWidth={2.2} />
+            <span>{directionsLabel}</span>
+          </a>
+        </div>
       </div>
     </div>
   );

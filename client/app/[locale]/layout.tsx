@@ -8,7 +8,6 @@ import { SITE_DESCRIPTION, SITE_NAME, SITE_TAGLINE, SITE_URL } from "@/lib/seo";
 import { Navbar } from "./_components/navbar";
 import { Footer } from "./_components/footer";
 import { SmoothScroll } from "./_components/smooth-scroll";
-import { CustomCursor } from "./_components/custom-cursor";
 import { RevealOnScroll } from "./_components/reveal-on-scroll";
 import { QueryProvider } from "./_components/query-provider";
 import { CartProvider } from "@/lib/cart/context";
@@ -98,7 +97,7 @@ const localBusinessJsonLd = {
   "@type": ["FoodEstablishment", "LocalBusiness"],
   "@id": `${SITE_URL}/#business`,
   name: SITE_NAME,
-  alternateName: "Hot Sausage Company",
+  alternateName: ["Hot Sausage Company", "Cambridge Hot Sausage"],
   url: SITE_URL,
   logo: `${SITE_URL}/icon.png`,
   image: `${SITE_URL}/opengraph-image`,
@@ -178,7 +177,6 @@ export default async function LocaleLayout({
             <CartProvider>
               <SmoothScroll />
               <RevealOnScroll />
-              <CustomCursor />
               <Navbar />
               <CartDrawer />
               {children}

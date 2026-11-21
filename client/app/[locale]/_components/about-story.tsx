@@ -11,14 +11,14 @@ import josephImg from "@/img/about/joseph.webp";
 
 gsap.registerPlugin(ScrollTrigger);
 
-type MilestoneKey = "founded" | "recipe" | "landmark" | "events" | "today";
+type MilestoneKey = "founded" | "cambridgeLife" | "parties" | "anniversary" | "today";
 type ValueKey = "quality" | "tradition" | "community";
 
 const MILESTONE_KEYS: MilestoneKey[] = [
   "founded",
-  "recipe",
-  "landmark",
-  "events",
+  "cambridgeLife",
+  "parties",
+  "anniversary",
   "today",
 ];
 
@@ -128,17 +128,6 @@ export function AboutStory() {
                     {t(`story.paragraphs.${key}`)}
                   </p>
                 ))}
-
-                {/* Grandma quote — styled as a pull quote */}
-                <blockquote
-                  data-reveal
-                  style={{ animationDelay: "450ms" }}
-                  className="mt-4 border-l-4 border-brand-gold pl-5 italic"
-                >
-                  <p className="text-base leading-relaxed text-brand-maroon sm:text-lg">
-                    &ldquo;{t("story.paragraphs.grandma")}&rdquo;
-                  </p>
-                </blockquote>
               </div>
             </div>
           </div>

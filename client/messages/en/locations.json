@@ -3,9 +3,9 @@
     "title": "Locations"
   },
   "hero": {
-    "eyebrow": "Find the barrow",
-    "title": "Come find us",
-    "subtitle": "Tucked just off the high street, two minutes from the Grand Arcade. Look for the Victorian barrow — you can't miss it."
+    "eyebrow": "Find the Fitzroy Street barrow",
+    "title": "Hot dogs on Fitzroy Street, Cambridge",
+    "subtitle": "Looking for a proper hot dog in Cambridge? Come and see us at our traditional Victorian-style barrow on Fitzroy Street. Whether you're shopping, exploring or taking a lunch break, stop by for something tasty and a friendly hello."
   },
   "highlight": {
     "title": "Two spots. Forty years. Countless hot dogs.",
@@ -19,16 +19,21 @@
   "info": {
     "main": {
       "label": "Main location",
-      "name": "The Barrow — Fitzroy Street",
-      "line": "Pitch 14, Fitzroy Street, Cambridge CB1 1EW"
+      "name": "Fitzroy Street Barrow",
+      "description": "Find The Hot Sausage Company on Fitzroy Street, Cambridge. Join us for a hot dog between shops, a quick lunch or a bite while exploring the city.",
+      "line": "Pitch 14, Fitzroy Street, Cambridge CB1 1EW",
+      "directions": "Get directions to Fitzroy Street"
     },
     "secondary": {
-      "label": "Second location",
-      "name": "Market Passage",
-      "line": "2 Market Passage, Cambridge CB2 3PA"
+      "label": "Also find us",
+      "name": "Market Passage Barrow",
+      "description": "Closer to Market Passage? You can also stop by our second Cambridge barrow for a hot dog.",
+      "line": "2 Market Passage, Cambridge CB2 3PA",
+      "directions": "Get directions to Market Passage"
     },
     "hours": {
-      "label": "Opening hours",
+      "label": "Plan your visit",
+      "title": "Fitzroy Street opening hours",
       "weekdays": "Monday – Friday",
       "weekdaysTimes": "10:00 – 18:00",
       "saturday": "Saturday",

@@ -18,7 +18,7 @@ interface LocateUsMapProps {
 const DEFAULT_PIN: MapPin = {
   lat: 52.206680540625506,
   lng: 0.1298263621124822,
-  name: "Cambridge Hot Sausage",
+  name: "The Hot Sausage Company",
   address: "Pitch 14, Fitzroy Street, Cambridge CB1 1EW",
 };
 

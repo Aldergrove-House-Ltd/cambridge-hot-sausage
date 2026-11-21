@@ -3,18 +3,17 @@
     "title": "About Us"
   },
   "hero": {
-    "eyebrow": "Since 1986",
-    "title": "The man behind the barrow",
-    "subtitle": "Forty years of Cambridge tradition, one sausage at a time."
+    "eyebrow": "Serving Cambridge since 1986",
+    "title": "The people behind the barrow",
+    "subtitle": "Forty years of hot dogs, friendly faces and Cambridge memories. Discover the story of The Hot Sausage Company and our much-loved traditional barrow."
   },
   "story": {
     "eyebrow": "Our story",
-    "title": "From a humble barrow to a Cambridge legend",
+    "title": "A little barrow. A big Cambridge story.",
     "paragraphs": {
-      "origin": "Serving Cambridge's famous hot sausages for over 40 years, our Victorian-style barrow on Fitzroy Street has been a local favourite since 1986. We specialise in classic hot dogs made with the legendary Cambridge sausage, freshly prepared and served with simple, satisfying toppings.",
-      "community": "What started as a humble street barrow has become a familiar part of the neighbourhood, feeding students, locals, workers, and passers-by alike. Generations have stopped by for a proper hot dog and a friendly chat.",
-      "mission": "From 1986 to 2026, our mission has stayed the same: great sausages, great service, and a bit of Cambridge tradition on every bun.",
-      "grandma": "Officially voted the best hot dogs around by our most important critic — my very own grandmother."
+      "origin": "Founded by Michael Moran in 1986, The Hot Sausage Company has been bringing people together over hot dogs for four decades. Our Victorian-style barrow is a familiar sight on Fitzroy Street, welcoming everyone from students between lectures to families enjoying a day in Cambridge.",
+      "community": "Today, Joseph and the team keep that tradition going with satisfying hot dogs, your favourite toppings and a friendly welcome. Whether you're a regular or following the smell of cooked onions for the first time, there's always a place for you at the barrow.",
+      "mission": "From everyday lunch stops to wedding celebrations, we're proud to be part of Cambridge's street food story."
     }
   },
   "milestones": {
@@ -23,45 +22,45 @@
     "items": {
       "founded": {
         "year": "1986",
-        "title": "The barrow is born",
-        "description": "A Victorian-style cart appears on Fitzroy Street for the very first time."
+        "title": "Where it all began",
+        "description": "Michael Moran founded The Hot Sausage Company, beginning a story of traditional barrows, hot sausages and friendly service."
       },
-      "recipe": {
-        "year": "1990s",
-        "title": "The recipe is perfected",
-        "description": "After years of refinement, the legendary Cambridge sausage recipe reaches its final form."
+      "cambridgeLife": {
+        "year": "Through the years",
+        "title": "Part of Cambridge life",
+        "description": "Lunch breaks, shopping trips and student days: our hot dogs become part of the everyday memories people make in Cambridge."
       },
-      "landmark": {
-        "year": "2000s",
-        "title": "A Cambridge landmark",
-        "description": "The barrow becomes a recognised part of the city's identity, feeding thousands every year."
+      "parties": {
+        "year": "Beyond the street",
+        "title": "The barrow joins the party",
+        "description": "Weddings, private parties and corporate gatherings bring a taste of our Cambridge hot dogs to special occasions."
       },
-      "events": {
-        "year": "2010s",
-        "title": "Events & catering",
-        "description": "Weddings, festivals and corporate events — the barrow starts travelling across the region."
+      "anniversary": {
+        "year": "2026",
+        "title": "Forty years, celebrated together",
+        "description": "Our 40th anniversary brings 40 Days of Celebration, with giveaways, familiar faces and new memories at the barrow."
       },
       "today": {
-        "year": "2020s",
-        "title": "Still going strong",
-        "description": "Four decades in, the mission hasn't changed. Great sausages, great service, every single day."
+        "year": "Today",
+        "title": "The story continues",
+        "description": "Find us on Fitzroy Street, explore our merchandise online or enquire about bringing the barrow to your next event."
       }
     }
   },
   "values": {
     "eyebrow": "What we stand for",
-    "title": "Simple values, honest food",
+    "title": "Good food. Warm welcomes. Local spirit.",
     "quality": {
-      "title": "Quality first",
-      "description": "Every sausage is made with premium ingredients — no shortcuts, no compromises."
+      "title": "Quality",
+      "description": "A satisfying hot dog, prepared with care and finished with the toppings you love. Simple food that keeps you coming back."
     },
     "tradition": {
       "title": "Tradition",
-      "description": "The same recipe, the same barrow, the same commitment since day one."
+      "description": "Our Victorian-style barrow celebrates the character of traditional street food, carrying a Cambridge story forward from 1986."
     },
     "community": {
       "title": "Community",
-      "description": "We're not just a food stand — we're part of the neighbourhood."
+      "description": "Being part of Fitzroy Street means more than serving hot dogs. From chessboards and games tables that bring people together to litter picks that keep our streets welcoming, we love doing our bit. We also look out for neighbouring businesses, helping make our corner of Cambridge a friendly, safer place for everyone."
     }
   }
 }

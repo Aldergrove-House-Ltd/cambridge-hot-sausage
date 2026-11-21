@@ -15,8 +15,8 @@ export async function generateMetadata({
   const { locale } = await params;
   return pageMetadata({
     // `title.absolute` short-circuits the layout's template — keeps the home
-    // tab clean: "Cambridge Hot Sausage — Hot Dogs on Fitzroy Street since 1986"
-    // instead of "X · Cambridge Hot Sausage".
+    // tab clean: "The Hot Sausage Company — Hot Dogs on Fitzroy Street since 1986"
+    // instead of "X · The Hot Sausage Company".
     title: `${SITE_NAME} — ${SITE_TAGLINE}`,
     description:
       "Cambridge's famous hot dogs. Victorian-style barrow at Pitch 14, Fitzroy Street — serving the legendary Cambridge sausage since 1986. Order online, book us for events, or visit us in town.",

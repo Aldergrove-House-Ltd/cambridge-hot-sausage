@@ -13,7 +13,7 @@ export async function generateMetadata({
   return pageMetadata({
     title: t("title"),
     description:
-      "Get in touch with Cambridge Hot Sausage. Send a message, ask about events, suggest a stockist, or just say hello.",
+      "Get in touch with The Hot Sausage Company. Send a message, ask about events, suggest a stockist, or just say hello.",
     path: "/contact",
     locale,
   });

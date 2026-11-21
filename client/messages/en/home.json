@@ -1,39 +1,39 @@
 {
   "hero": {
-    "eyebrow": "Est. 1986 · Fitzroy Street",
-    "title": "Cambridge Hot Sausage",
-    "subtitle": "Serving Cambridge's famous hot sausages for over 40 years from our Victorian-style barrow."
+    "eyebrow": "Est. 1986 · Cambridge",
+    "title": "Hot dogs in Cambridge, served with history",
+    "subtitle": "Welcome to The Hot Sausage Company. Serving hot dogs from our traditional Victorian-style barrow on Fitzroy Street since 1986. Stop by for lunch, a shopping break or a bite between lectures."
   },
   "certifications": {
-    "eyebrow": "Certified & accredited",
-    "title": "Quality you can trust",
-    "subtitle": "Independently verified for food safety, hygiene and quality — so you can focus on the flavour."
+    "eyebrow": "Care in every serving",
+    "title": "Good food. Friendly faces. Peace of mind.",
+    "subtitle": "From lunch on Fitzroy Street to catering for your celebration, we take food hygiene and safe preparation seriously. Have a question about ingredients or allergens? Please ask our team before ordering."
   },
   "moments": {
-    "eyebrow": "Forty years on Fitzroy Street",
+    "eyebrow": "Forty years of Cambridge memories",
     "title": "Moments from the barrow",
-    "subtitle": "Hot dogs, weddings, late-night queues — the Cambridge story we've been writing since 1986.",
-    "hint": "Scroll to explore"
+    "subtitle": "From Fitzroy Street lunch stops to wedding celebrations, we've been bringing people together over hot dogs since 1986. Take a look at the faces, places and happy memories that make our story.",
+    "hint": "Explore our photos"
   },
   "eventBooking": {
     "eyebrow": "Book the barrow",
-    "title": "Bring our hot dogs to your event",
-    "subtitle": "Pop-up service for weddings, parties and corporate events — fully self-contained, ready to serve at any venue around Cambridge.",
+    "title": "A little Cambridge character for your event",
+    "subtitle": "Bring our traditional hot dog barrow to your wedding, party or corporate event. Enjoy a taste of Cambridge street food, friendly service and something your guests will remember.",
     "features": {
       "schedule": {
-        "title": "Pop-up events",
-        "description": "Single-day bookings tailored around your day."
+        "title": "Weddings & celebrations",
+        "description": "From wedding evening food to birthday parties, give your guests a hot dog and a reason to gather."
       },
       "service": {
-        "title": "Flexible hours",
-        "description": "A short service window built around your schedule."
+        "title": "Service to suit your day",
+        "description": "Tell us your plans and we'll help arrange serving times around your celebration."
       },
       "venue": {
-        "title": "Any venue",
-        "description": "Fully self-contained — wherever the celebration is."
+        "title": "Your venue, our barrow",
+        "description": "Planning an event in Cambridge or the surrounding area? Let's talk about your location and the space you have available."
       }
     },
-    "ctaLabel": "Check availability",
+    "ctaLabel": "Enquire about your event",
     "ctaNote": "Pick a date · pay securely with Stripe"
   },
   "locateUs": {

@@ -13,7 +13,7 @@ export async function generateMetadata({
   return pageMetadata({
     title: "Chilli Challenge",
     description:
-      "Four levels of heat, four legendary sausages and one Wall of Flame. Take the Cambridge Hot Sausage chilli challenge at the Fitzroy Street barrow.",
+      "Four levels of heat, four legendary sausages and one Wall of Flame. Take The Hot Sausage Company's chilli challenge at the Fitzroy Street barrow.",
     path: "/chilli-challenge",
     locale,
   });

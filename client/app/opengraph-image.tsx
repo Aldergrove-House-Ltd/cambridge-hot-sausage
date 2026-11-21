@@ -1,6 +1,6 @@
 import { ImageResponse } from "next/og";
 
-export const alt = "Cambridge Hot Sausage — Hot Dogs on Fitzroy Street since 1986";
+export const alt = "The Hot Sausage Company — Hot Dogs on Fitzroy Street since 1986";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
@@ -84,7 +84,7 @@ export default async function OpenGraphImage() {
         <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
           <div
             style={{
-              fontSize: 124,
+              fontSize: 108,
               fontWeight: 800,
               lineHeight: 1,
               letterSpacing: -2,
@@ -93,8 +93,8 @@ export default async function OpenGraphImage() {
               flexDirection: "column",
             }}
           >
-            <span>Cambridge</span>
-            <span style={{ color: COLORS.gold }}>Hot Sausage</span>
+            <span>The Hot Sausage</span>
+            <span style={{ color: COLORS.gold }}>Company</span>
           </div>
           <div
             style={{

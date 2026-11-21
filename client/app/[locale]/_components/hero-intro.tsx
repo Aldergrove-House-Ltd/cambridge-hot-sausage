@@ -1,17 +1,12 @@
 "use client";
 
 import { useRef } from "react";
-import dynamic from "next/dynamic";
 import { Button } from "@heroui/react";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
-
-const VantaNetBg = dynamic(
-  () => import("./vanta-net-bg").then((m) => m.VantaNetBg),
-  { ssr: false },
-);
+import { CambridgeSketchBg } from "./cambridge-sketch-bg";
 
 export function HeroIntro() {
   const root = useRef<HTMLDivElement>(null);
@@ -36,17 +31,17 @@ export function HeroIntro() {
       ref={root}
       className="relative isolate flex h-full min-h-dvh w-full flex-col items-center justify-center gap-6 overflow-hidden px-6 text-center"
     >
-      <VantaNetBg />
-      {/* Cream wash behind the hero copy so the net stays visible at the
-          edges but doesn't fight the text in the middle */}
+      <CambridgeSketchBg />
+      {/* Cream wash behind the hero copy (reaching down to the buttons) so
+          the full-bleed sketch never fights the text */}
       <div
         aria-hidden
-        className="pointer-events-none absolute inset-0 -z-[5] bg-[radial-gradient(ellipse_60%_50%_at_center,rgba(245,241,232,0.92)_0%,rgba(245,241,232,0.7)_35%,rgba(245,241,232,0)_70%)]"
+        className="pointer-events-none absolute inset-0 -z-[5] bg-[radial-gradient(ellipse_60%_56%_at_center,rgba(245,241,232,0.92)_0%,rgba(245,241,232,0.72)_38%,rgba(245,241,232,0)_72%)]"
       />
       <span className="hero-item text-xs uppercase tracking-[0.3em] text-brand-sage">
         {tHome("hero.eyebrow")}
       </span>
-      <h1 className="hero-item font-display text-4xl leading-tight text-accent sm:text-6xl">
+      <h1 className="hero-item max-w-4xl text-balance font-display text-4xl leading-tight text-accent sm:text-6xl">
         {tHome("hero.title")}
       </h1>
       <p className="hero-item max-w-xl text-balance text-base text-foreground/80 sm:text-lg">
@@ -59,7 +54,8 @@ export function HeroIntro() {
           </Button>
         </Link>
         <Link href="/events">
-          <Button variant="outline" size="lg">
+          {/* Cream fill keeps the outline button legible over the sketch */}
+          <Button variant="outline" size="lg" className="bg-brand-cream/85 backdrop-blur-sm">
             {tCommon("actions.bookEvent")}
           </Button>
         </Link>

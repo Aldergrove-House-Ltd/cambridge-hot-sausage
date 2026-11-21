@@ -18,7 +18,7 @@ export async function generateMetadata({
     const image = product.images?.[0]?.image;
     const description = product.description
       ? product.description.replace(/[#*_>`~\n]/g, " ").replace(/\s+/g, " ").trim().slice(0, 160)
-      : `Order ${product.name} from Cambridge Hot Sausage — fresh from the Fitzroy Street barrow.`;
+      : `Order ${product.name} from The Hot Sausage Company — fresh from the Fitzroy Street barrow.`;
     return pageMetadata({
       title: t("productTitle", { name: product.name }),
       description,
@@ -32,7 +32,7 @@ export async function generateMetadata({
   } catch {
     return pageMetadata({
       title: t("title"),
-      description: "Browse Cambridge Hot Sausage products.",
+      description: "Browse The Hot Sausage Company products.",
       path: `/shop/${slug}`,
       locale,
     });
@@ -68,7 +68,7 @@ export default async function ProductPage({
     description: product.description?.slice(0, 5000),
     sku: product.variants[0]?.sku,
     url: productUrl,
-    brand: { "@type": "Brand", name: "Cambridge Hot Sausage" },
+    brand: { "@type": "Brand", name: "The Hot Sausage Company" },
     image: product.images?.map((i) => i.image).filter(Boolean),
   };
   if (minPrice !== null && maxPrice !== null) {

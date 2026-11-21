@@ -13,7 +13,7 @@ export async function generateMetadata({
   return pageMetadata({
     title: t("title"),
     description:
-      "Hire Cambridge Hot Sausage for your wedding, college ball, corporate event or private party. Live calendar, instant quote, single-day bookings across Cambridgeshire and beyond.",
+      "Hire The Hot Sausage Company for your wedding, college ball, corporate event or private party. Live calendar, instant quote, single-day bookings across Cambridgeshire and beyond.",
     path: "/events",
     locale,
   });

@@ -3,7 +3,7 @@ import type { Metadata } from "next";
 import { routing } from "@/i18n/routing";
 
 export const SITE_URL = "https://www.hotsausagecompany.com";
-export const SITE_NAME = "Cambridge Hot Sausage";
+export const SITE_NAME = "The Hot Sausage Company";
 export const SITE_TAGLINE = "Hot Dogs on Fitzroy Street since 1986";
 export const SITE_DESCRIPTION =
   "Cambridge's famous hot dogs — served from a Victorian-style barrow on Fitzroy Street since 1986. Order online, book us for events, or visit the barrow.";

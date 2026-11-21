@@ -11,7 +11,7 @@ export async function generateMetadata({
   return pageMetadata({
     title: "Privacy Policy",
     description:
-      "How Cambridge Hot Sausage collects, uses and protects your personal data under UK GDPR.",
+      "How The Hot Sausage Company collects, uses and protects your personal data under UK GDPR.",
     path: "/legal/privacy",
     locale,
   });
@@ -40,7 +40,7 @@ export default async function PrivacyPage({
             <h2>1. What We Collect</h2>
             <p>
               When you use our website, place an order, or book an event,
-              Cambridge Hot Sausage may collect the following personal
+              The Hot Sausage Company may collect the following personal
               information:
             </p>
             <ul>
@@ -144,7 +144,7 @@ export default async function PrivacyPage({
               exercise your data rights, please contact us at:
             </p>
             <p>
-              <strong>Cambridge Hot Sausage</strong>
+              <strong>The Hot Sausage Company</strong>
               <br />
               Email:{" "}
               <a

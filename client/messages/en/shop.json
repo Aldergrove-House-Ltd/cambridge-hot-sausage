@@ -4,16 +4,43 @@
     "productTitle": "{name}"
   },
   "listing": {
-    "eyebrow": "The menu",
-    "title": "Our shop",
-    "subtitle": "Classic hot dogs, sides, drinks and merch — everything from the barrow, available online.",
-    "filterAll": "All",
-    "search": "Search products…",
+    "eyebrow": "A little piece of Cambridge",
+    "title": "Hot dog gift cards, sauces and merchandise",
+    "subtitle": "Give someone a tasty reason to visit Fitzroy Street. Our hot dog gift cards are a lovely treat for friends, family or anyone who enjoys a bite of Cambridge street food.\n\nBring your favourite flavours home with our Econa sauces, or browse our aprons, umbrellas and other Hot Sausage Company merchandise.",
+    "filterAll": "All products",
+    "search": "Search gift cards, sauces and merchandise…",
     "noResults": "No products match your search.",
     "featured": "Featured",
     "from": "From",
     "outOfStock": "Out of stock",
-    "viewProduct": "View product"
+    "viewProduct": "View product",
+    "promos": {
+      "giftCards": {
+        "title": "Give the gift of hot dogs",
+        "body": "Treat someone to lunch at the barrow, with more hot dogs to enjoy another day.",
+        "options": {
+          "five": {
+            "label": "5 hot dogs — £22",
+            "note": "A little gift with plenty of flavour."
+          },
+          "ten": {
+            "label": "10 hot dogs — £40",
+            "note": "More visits, more hot dogs, more reasons to smile."
+          }
+        },
+        "cta": "Shop gift cards"
+      },
+      "sauces": {
+        "title": "Bring home the flavour",
+        "body": "Add a little extra kick to your kitchen with our range of Econa sauces. Find a favourite to enjoy at home or give to a fellow sauce lover.",
+        "cta": "Shop sauces"
+      },
+      "merchandise": {
+        "title": "A keepsake from the barrow",
+        "body": "From aprons to umbrellas, take a little Hot Sausage Company character wherever you go.",
+        "cta": "Shop merchandise"
+      }
+    }
   },
   "detail": {
     "backToShop": "Back to shop",

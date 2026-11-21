@@ -18,7 +18,7 @@ export async function generateMetadata({
   return pageMetadata({
     title: t("title"),
     description:
-      "Order Cambridge Hot Sausage's classic hot dogs, sides, drinks and merchandise online. Delivery across the UK from the Fitzroy Street barrow.",
+      "Shop hot dog gift cards, sauces and merchandise from The Hot Sausage Company, serving Cambridge from our Fitzroy Street barrow since 1986.",
     path: "/shop",
     locale,
   });

@@ -13,8 +13,7 @@
     "paragraphs": {
       "origin": "Seit über 40 Jahren servieren wir Cambridges berühmte heiße Würstchen. Unser viktorianischer Karren in der Fitzroy Street ist seit 1986 ein Favorit der Einheimischen. Wir spezialisieren uns auf klassische Hot Dogs mit der legendären Cambridge-Wurst, frisch zubereitet und mit einfachen, köstlichen Belägen serviert.",
       "community": "Was als bescheidener Straßenkarren begann, ist zu einem vertrauten Teil der Nachbarschaft geworden und versorgt Studenten, Einheimische, Arbeiter und Passanten. Generationen sind für einen richtigen Hot Dog und ein freundliches Gespräch vorbeigekommen.",
-      "mission": "Von 1986 bis 2026 ist unsere Mission die gleiche geblieben: großartige Würstchen, großartiger Service und ein Stück Cambridge-Tradition auf jedem Brötchen.",
-      "grandma": "Offiziell zum besten Hot Dog gewählt von unserer wichtigsten Kritikerin — meiner eigenen Großmutter."
+      "mission": "Von 1986 bis 2026 ist unsere Mission die gleiche geblieben: großartige Würstchen, großartiger Service und ein Stück Cambridge-Tradition auf jedem Brötchen."
     }
   },
   "milestones": {
@@ -26,17 +25,17 @@
         "title": "Der Karren wird geboren",
         "description": "Ein viktorianischer Karren erscheint zum allerersten Mal in der Fitzroy Street."
       },
-      "recipe": {
+      "cambridgeLife": {
         "year": "1990er",
         "title": "Das Rezept wird perfektioniert",
         "description": "Nach Jahren der Verfeinerung erreicht das legendäre Cambridge-Wurst-Rezept seine endgültige Form."
       },
-      "landmark": {
+      "parties": {
         "year": "2000er",
         "title": "Ein Cambridge-Wahrzeichen",
         "description": "Der Karren wird zu einem anerkannten Teil der Stadtidentität und versorgt jedes Jahr Tausende."
       },
-      "events": {
+      "anniversary": {
         "year": "2010er",
         "title": "Events & Catering",
         "description": "Hochzeiten, Festivals und Firmenveranstaltungen — der Karren beginnt durch die Region zu reisen."

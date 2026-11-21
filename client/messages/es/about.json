@@ -13,8 +13,7 @@
     "paragraphs": {
       "origin": "Sirviendo las famosas salchichas calientes de Cambridge durante más de 40 años, nuestro carrito de estilo victoriano en Fitzroy Street ha sido un favorito local desde 1986. Nos especializamos en hot dogs clásicos hechos con la legendaria salchicha de Cambridge, preparados frescos y servidos con ingredientes simples y satisfactorios.",
       "community": "Lo que comenzó como un humilde carrito callejero se ha convertido en una parte familiar del barrio, alimentando a estudiantes, locales, trabajadores y transeúntes por igual. Generaciones se han detenido para un buen hot dog y una charla amigable.",
-      "mission": "De 1986 a 2026, nuestra misión ha sido la misma: grandes salchichas, gran servicio y un poco de tradición de Cambridge en cada pan.",
-      "grandma": "Oficialmente votado como el mejor hot dog por nuestra crítica más importante — mi propia abuela."
+      "mission": "De 1986 a 2026, nuestra misión ha sido la misma: grandes salchichas, gran servicio y un poco de tradición de Cambridge en cada pan."
     }
   },
   "milestones": {
@@ -26,17 +25,17 @@
         "title": "Nace el carrito",
         "description": "Un carrito de estilo victoriano aparece en Fitzroy Street por primera vez."
       },
-      "recipe": {
+      "cambridgeLife": {
         "year": "1990s",
         "title": "La receta se perfecciona",
         "description": "Después de años de refinamiento, la legendaria receta de la salchicha de Cambridge alcanza su forma final."
       },
-      "landmark": {
+      "parties": {
         "year": "2000s",
         "title": "Un ícono de Cambridge",
         "description": "El carrito se convierte en una parte reconocida de la identidad de la ciudad, alimentando a miles cada año."
       },
-      "events": {
+      "anniversary": {
         "year": "2010s",
         "title": "Eventos y catering",
         "description": "Bodas, festivales y eventos corporativos — el carrito comienza a viajar por la región."

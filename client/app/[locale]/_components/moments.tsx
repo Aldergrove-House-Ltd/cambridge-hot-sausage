@@ -13,7 +13,7 @@ gsap.registerPlugin(ScrollTrigger, useGSAP);
 const PHOTOS: { src: string; alt: string; w: number; h: number }[] = [
   {
     src: "https://www.hotsausagecompany.com/wp-content/uploads/2022/03/downloadwedding.webp",
-    alt: "Cambridge Hot Sausage at a wedding",
+    alt: "The Hot Sausage Company at a wedding",
     w: 1024,
     h: 768,
   },

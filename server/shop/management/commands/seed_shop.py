@@ -174,7 +174,7 @@ class Command(BaseCommand):
                 "is_featured": False,
             },
             {
-                "name": "Cambridge Hot Sausage T-Shirt",
+                "name": "The Hot Sausage Company T-Shirt",
                 "description": "100% organic cotton, screen-printed in Cambridge. Features our iconic barrow illustration on the front.",
                 "categories": ["Merch"],
                 "is_featured": True,
@@ -248,7 +248,7 @@ class Command(BaseCommand):
                 {"name": "Regular", "price": "3.00", "stock": 999},
                 {"name": "Large", "price": "3.50", "stock": 999},
             ],
-            "Cambridge Hot Sausage T-Shirt": [
+            "The Hot Sausage Company T-Shirt": [
                 {"name": "S", "price": "22.00", "stock": 50},
                 {"name": "M", "price": "22.00", "stock": 80},
                 {"name": "L", "price": "22.00", "stock": 60},
@@ -329,7 +329,7 @@ class Command(BaseCommand):
                 ],
             },
             {
-                "product": "Cambridge Hot Sausage T-Shirt",
+                "product": "The Hot Sausage Company T-Shirt",
                 "reviews": [
                     {"author_name": "Liam G.", "author_email": "l@test.com", "rating": 5, "title": "Quality merch", "text": "Soft cotton, great print quality. Gets comments every time I wear it. A proper conversation starter."},
                     {"author_name": "Charlotte B.", "author_email": "c@test.com", "rating": 4, "title": "Love the design", "text": "The barrow illustration is beautiful. Runs slightly large so maybe size down if you're between sizes."},

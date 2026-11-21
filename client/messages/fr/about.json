@@ -13,8 +13,7 @@
     "paragraphs": {
       "origin": "Servant les célèbres saucisses chaudes de Cambridge depuis plus de 40 ans, notre chariot de style victorien sur Fitzroy Street est un favori local depuis 1986. Nous nous spécialisons dans les hot dogs classiques préparés avec la légendaire saucisse de Cambridge, fraîchement préparés et servis avec des garnitures simples et savoureuses.",
       "community": "Ce qui a commencé comme un simple chariot de rue est devenu un élément familier du quartier, nourrissant étudiants, locaux, travailleurs et passants. Des générations se sont arrêtées pour un bon hot dog et une conversation amicale.",
-      "mission": "De 1986 à 2026, notre mission est restée la même : de bonnes saucisses, un bon service et un peu de tradition de Cambridge sur chaque pain.",
-      "grandma": "Officiellement élu meilleur hot dog par notre critique la plus importante — ma propre grand-mère."
+      "mission": "De 1986 à 2026, notre mission est restée la même : de bonnes saucisses, un bon service et un peu de tradition de Cambridge sur chaque pain."
     }
   },
   "milestones": {
@@ -26,17 +25,17 @@
         "title": "Le chariot est né",
         "description": "Un chariot de style victorien apparaît sur Fitzroy Street pour la toute première fois."
       },
-      "recipe": {
+      "cambridgeLife": {
         "year": "1990s",
         "title": "La recette est perfectionnée",
         "description": "Après des années de perfectionnement, la légendaire recette de saucisse de Cambridge atteint sa forme finale."
       },
-      "landmark": {
+      "parties": {
         "year": "2000s",
         "title": "Un monument de Cambridge",
         "description": "Le chariot devient une partie reconnue de l'identité de la ville, nourrissant des milliers de personnes chaque année."
       },
-      "events": {
+      "anniversary": {
         "year": "2010s",
         "title": "Événements & traiteur",
         "description": "Mariages, festivals et événements d'entreprise — le chariot commence à voyager dans la région."

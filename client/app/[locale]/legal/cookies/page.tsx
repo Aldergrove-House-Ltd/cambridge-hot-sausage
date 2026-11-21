@@ -11,7 +11,7 @@ export async function generateMetadata({
   return pageMetadata({
     title: "Cookie Policy",
     description:
-      "Cambridge Hot Sausage uses only essential cookies. Full list of what we set and why.",
+      "The Hot Sausage Company uses only essential cookies. Full list of what we set and why.",
     path: "/legal/cookies",
     locale,
   });
@@ -111,7 +111,7 @@ export default async function CookiesPage({
               us at:
             </p>
             <p>
-              <strong>Cambridge Hot Sausage</strong>
+              <strong>The Hot Sausage Company</strong>
               <br />
               Email:{" "}
               <a

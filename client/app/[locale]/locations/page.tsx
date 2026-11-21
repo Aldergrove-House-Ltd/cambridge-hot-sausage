@@ -13,7 +13,7 @@ export async function generateMetadata({
   return pageMetadata({
     title: t("title"),
     description:
-      "Find the Cambridge Hot Sausage barrow at Pitch 14, Fitzroy Street, Cambridge CB1 1ER. Opening hours, directions and a live map of where we are today.",
+      "Find The Hot Sausage Company's barrow at Pitch 14, Fitzroy Street, Cambridge CB1 1ER. Opening hours, directions and a live map of where we are today.",
     path: "/locations",
     locale,
   });

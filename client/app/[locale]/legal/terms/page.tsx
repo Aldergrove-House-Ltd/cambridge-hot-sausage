@@ -11,7 +11,7 @@ export async function generateMetadata({
   return pageMetadata({
     title: "Terms of Service",
     description:
-      "Terms and conditions governing the use of the Cambridge Hot Sausage website, online shop and event booking service.",
+      "Terms and conditions governing the use of The Hot Sausage Company's website, online shop and event booking service.",
     path: "/legal/terms",
     locale,
   });
@@ -39,7 +39,7 @@ export default async function TermsPage({
           <div className="prose prose-sm mt-8 max-w-none text-brand-ink/70">
             <h2>1. Acceptance</h2>
             <p>
-              By accessing or using the Cambridge Hot Sausage website
+              By accessing or using The Hot Sausage Company's website
               (www.hotsausagecompany.com), you agree to be bound by these Terms
               of Service. If you do not agree, please do not use our website or
               services.
@@ -47,7 +47,7 @@ export default async function TermsPage({
 
             <h2>2. Services</h2>
             <p>
-              Cambridge Hot Sausage operates an online shop for purchasing food
+              The Hot Sausage Company operates an online shop for purchasing food
               products and an event booking service for private catering. All
               services described on this website are subject to availability.
             </p>
@@ -100,7 +100,7 @@ export default async function TermsPage({
             <h2>5. Delivery</h2>
             <p>
               Delivery options and estimated timescales are displayed at
-              checkout. Cambridge Hot Sausage is not responsible for delays
+              checkout. The Hot Sausage Company is not responsible for delays
               caused by third-party carriers or circumstances beyond our control.
             </p>
 
@@ -115,7 +115,7 @@ export default async function TermsPage({
             <h2>7. Intellectual Property</h2>
             <p>
               All content on this website — including text, images, logos, and
-              design — is the property of Cambridge Hot Sausage and is protected
+              design — is the property of The Hot Sausage Company and is protected
               by copyright and intellectual property laws. You may not reproduce,
               distribute, or create derivative works from any content without our
               prior written permission.
@@ -123,7 +123,7 @@ export default async function TermsPage({
 
             <h2>8. Limitation of Liability</h2>
             <p>
-              To the maximum extent permitted by law, Cambridge Hot Sausage
+              To the maximum extent permitted by law, The Hot Sausage Company
               shall not be liable for any indirect, incidental, or consequential
               damages arising from the use of our website or services. Our total
               liability for any claim shall not exceed the amount paid by you for
@@ -142,7 +142,7 @@ export default async function TermsPage({
               If you have any questions about these Terms, please contact us at:
             </p>
             <p>
-              <strong>Cambridge Hot Sausage</strong>
+              <strong>The Hot Sausage Company</strong>
               <br />
               Email:{" "}
               <a
